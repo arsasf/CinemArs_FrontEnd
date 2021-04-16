@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import BasicReact from "./pages/learning/BasicReact/BasicReact";
 import BasicHome from "./pages/learning/Home/Home";
 import BasicMovieDetail from "./pages/learning/MovieDetail/MovieDetail";
+import CinemArsNavbar from "./components/CinemArs/NavbarCinemars";
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
             exact
             component={BasicMovieDetail}
           />
+          <Route path="/cinemars" exact component={CinemArsNavbar} />
         </Switch>
       </Router>
     );

@@ -9,7 +9,7 @@ class BasicReact extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "Aulia Safitri",
+      name: "A u l",
       search: "",
       isShow: true,
       data: [
