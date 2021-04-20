@@ -1,0 +1,16 @@
+.containerCenter {
+  text-align: center;
+}
+
+.containerForm {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.rowCard {
+  margin-top: 20px;
+  justify-content: space-between;
+}
