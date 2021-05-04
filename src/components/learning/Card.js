@@ -12,15 +12,15 @@ class Cards extends Component {
     //   data: id,
     // });
     // [3]  = bisa dogunakan untuk detail product/data
-    this.props.history.push(`/learning/basic-movie-detail/${id}`);
+    // this.props.history.push(`/learning/basic-movie-detail/${id}`);
   };
   render() {
-    console.log(this.props);
+    console.log(this.props.data);
+    // console.log(this.state);
     const {
       movie_id,
       movie_name,
       movie_category,
-      movie_img,
       movie_release_date,
     } = this.props.data;
     const { handleUpdate, handleDelete, data } = this.props;
@@ -29,10 +29,7 @@ class Cards extends Component {
         <Card style={{ width: "18rem" }} className={styles.cardBody}>
           <Card.Img
             variant="top"
-            // src="https://a1hosting.net/wp-content/themes/arkahost/assets/image/default.jpg"
-            // src="https://cinemarsticketbooking.netlify.app/img/[V1]%20-%20Home%20Page/Desktop/Rectangle%20119.png/"
-            src={movie_img}
-            className={styles.cardImage}
+            src="https://a1hosting.net/wp-content/themes/arkahost/assets/image/default.jpg"
           />
           <Card.Body>
             <Card.Title>{movie_name}</Card.Title>

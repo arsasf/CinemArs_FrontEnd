@@ -26,6 +26,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    console.log("this get Data jalan");
     this.getData();
   }
 
@@ -36,7 +37,7 @@ class Home extends Component {
     axiosApiIntances
       .get(`movie?page=${page}&limit=${limit}`)
       .then((res) => {
-        // console.log(res);
+        // console.log(res.data.data);
         this.setState({ data: res.data.data, pagination: res.data.pagination });
       })
       .catch((err) => {
@@ -135,7 +136,8 @@ class Home extends Component {
   };
 
   render() {
-    console.log(this.state);
+    // console.log(this.state.data);
+    // console.log(this.props);
     const { totalpage } = this.state.pagination;
     const { isLoading, isUpdate } = this.state;
     return (
@@ -205,7 +207,6 @@ class Home extends Component {
               })
             )}
           </Row>
-          <Cards />
           <ReactPaginate
             previousLabel={"prev"}
             nextLabel={"next"}
