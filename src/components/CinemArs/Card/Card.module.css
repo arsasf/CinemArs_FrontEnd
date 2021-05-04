@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+.cardImage {
+  width: 90%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-family: "Mulish", sans-serif;
+}
+
+.cardBody {
+  padding-top: 10px;
+  align-items: center;
+  width: max-content;
+  background-color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+.text {
+  color: #969abb;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 12px;
+}
+
+.detail {
+  width: 100px;
+  background-color: white !important;
+  color: #5f2eea !important;
+  border-color: #5f2eea !important;
+}
+Button.detail:hover {
+  background-color: #5f2eea !important;
+  color: white !important;
+  border-color: #5f2eea !important;
+}
+@media (max-width: 991.98px) {
+  .cardBody {
+    padding-top: 10px;
+    align-items: center;
+    width: 100%;
+  }
+  .title {
+    font-size: 13px;
+  }
+}

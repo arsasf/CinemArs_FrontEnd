@@ -1,0 +1,272 @@
+/* Content2 */
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+.content2 {
+  font-family: "Mulish", sans-serif;
+}
+
+.card {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  justify-content: space-around;
+  height: 320px;
+  width: 320px;
+  border-radius: 8px;
+  border-color: #ebebeb;
+  border-style: solid;
+}
+
+.name {
+  display: flex;
+  justify-content: space-around;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.logoBioskop {
+  height: max-content;
+  margin-left: 20px;
+  margin-bottom: auto;
+  margin-top: auto;
+  padding-right: 20px;
+}
+
+.address h1 {
+  font-size: 24px;
+  text-align: left;
+  font-weight: 600;
+  color: #000000;
+  padding-top: 10px;
+  padding-bottom: 3px;
+}
+
+.address h6 {
+  font-size: 15px;
+  font-weight: lighter;
+  color: #6e7191;
+}
+
+.card span {
+  width: 100%;
+  height: 2px;
+  background-color: #dedede;
+}
+
+.time1 {
+  justify-content: space-between;
+  width: 24%;
+  height: 35px;
+  background-color: white !important;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 20px;
+  color: #6e7191 !important;
+  font-size: 12px;
+  font-weight: lighter;
+  border-color: white !important;
+  border: white !important;
+}
+
+.time1:hover {
+  background-color: rgba(0, 0, 0, 0.829) !important;
+  color: #f7f7fc !important;
+  border-color: rgba(0, 0, 0, 0.829) !important;
+  font-weight: lighter;
+  border-color: white !important;
+}
+
+.price {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price h1 {
+  width: 35%;
+  padding: 10px;
+  margin: 5px;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.price h6 {
+  width: 25%;
+  padding: 10px;
+  margin: 5px;
+  color: #6e7191;
+  font-size: 16px;
+}
+
+.booking {
+  display: flex;
+  justify-content: space-between;
+}
+
+.booking .btn1 {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #5f2eea !important;
+  font-size: 16px;
+  font-weight: lighter, 700;
+  color: #f7f7fc !important;
+  outline: #5f2eea !important;
+  border-color: #5f2eea !important;
+}
+
+.booking button.btn1:hover {
+  background-color: #f7f7fc;
+  color: #5f2eea;
+  font-weight: bold;
+}
+
+.content21 {
+  margin-top: 7%;
+  margin-bottom: 5%;
+}
+
+.line {
+  margin-top: 10px;
+  width: 500px;
+  height: 1px;
+  background-color: #dedede;
+}
+
+.content21 a {
+  font-size: 16px;
+  color: #5f2eea;
+  font-weight: 600, lighter;
+  text-decoration: none;
+}
+
+/**responsive */
+@media (max-width: 575.98px) {
+  .card {
+    height: 300px;
+    width: 200px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    /* justify-content: ; */
+    border-radius: 4px;
+  }
+
+  .name {
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: -20px;
+  }
+
+  .logoBioskop {
+    /* height: 25%; */
+    width: 40%;
+    margin-left: 5px;
+    margin-right: 7px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+    padding-right: 0px;
+  }
+
+  .address h1 {
+    font-size: 14px;
+    margin-left: 5px;
+    text-align: left;
+    font-weight: 600;
+    color: #000000;
+    padding-top: 5px;
+    padding-bottom: 0px;
+  }
+
+  .address h6 {
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 11px;
+    font-weight: lighter;
+    color: #6e7191;
+  }
+
+  .card span {
+    width: 100%;
+    height: 2px;
+    background-color: #dedede;
+  }
+
+  .time1 {
+    justify-content: space-between;
+    width: 32%;
+    height: 28px;
+    background-color: white !important;
+    margin-left: 2px;
+    margin-right: 0px;
+    margin-top: 3px;
+    color: rgb(70, 67, 67) !important;
+    font-size: 9px;
+    font-weight: lighter;
+  }
+
+  .price {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .price h1 {
+    width: 40%;
+    padding: 10px;
+    margin: 5px;
+    color: #000000;
+    font-size: 9px;
+    font-weight: 600;
+  }
+
+  .price h6 {
+    width: 25%;
+    padding: 10px;
+    margin: 5px;
+    color: #6e7191;
+    font-size: 12px;
+  }
+
+  .booking {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .booking .btn1 {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #5f2eea !important;
+    font-size: 16px;
+    font-weight: lighter, 700;
+    color: white !important;
+    outline: white !important;
+    border-color: white !important;
+  }
+
+  .booking button.btn1:hover {
+    background-color: #f7f7fc;
+    color: #302f31 !important;
+    font-weight: lighter !important;
+  }
+
+  .content21 {
+    margin-top: 7%;
+    margin-bottom: 5%;
+  }
+
+  .line {
+    margin-top: 10px;
+    width: 500px;
+    height: 1px;
+    background-color: #dedede;
+  }
+
+  .content21 a {
+    font-size: 16px;
+    color: #5f2eea;
+    font-weight: 600, lighter;
+    text-decoration: none;
+  }
+}
+/* Akhir Content2==================== */

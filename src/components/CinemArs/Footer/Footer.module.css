@@ -1,0 +1,225 @@
+/* * =================Footer======================* */
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+.footer {
+  font-family: "Mulish", sans-serif !important;
+  padding: 0 !important;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.footerContent {
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.footer1 {
+  color: #4e4b66;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.footer2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #4e4b66;
+}
+
+.footer3 {
+  display: flex !important;
+  flex-direction: row !important ;
+  align-items: baseline !important;
+  justify-content: center !important;
+}
+
+.footer4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #4e4b66;
+}
+
+.container h1 {
+  font-size: 16px;
+  color: black;
+  font-weight: 700;
+}
+
+.ourSponsor h1 {
+  font-size: 24px;
+  color: #4e4b66;
+  font-weight: 700;
+}
+.explore h1 {
+  font-size: 24px;
+  color: #4e4b66;
+  font-weight: 700;
+}
+.sosmed h1 {
+  font-size: 24px;
+  color: #4e4b66;
+  font-weight: 700;
+}
+
+.ebvId {
+  width: 70%;
+  height: auto;
+  margin-left: 28px;
+  margin-bottom: 10px;
+}
+
+.cineone {
+  width: 70%;
+  height: auto;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+.hiflix {
+  width: 70%;
+  height: auto;
+  margin-top: 5px;
+  margin-left: 30px;
+}
+
+.listSosmed {
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.listSosmed h6 {
+  margin-left: 10px;
+}
+
+.container h6 {
+  font-size: 14px;
+  color: #4e4b66;
+  font-weight: 400;
+}
+.footer5 {
+  margin-top: 20px;
+  padding-top: 15px;
+  justify-content: center;
+}
+.footer5 p {
+  color: #4e4b66;
+  font-size: 14px;
+  font-weight: 400;
+}
+/** responsive website */
+@media (max-width: 991.98px) {
+  .footer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .footer1 {
+    justify-content: left;
+    align-items: flex-start;
+    margin-left: 30px;
+  }
+  .logo {
+    width: 100px !important;
+    height: auto !important;
+  }
+  .textLogo {
+    display: flex;
+  }
+  .textLogo1 {
+    margin-left: -15px !important;
+    margin-right: 20px;
+  }
+  .textLogo1 h6 {
+    font-size: 14px;
+    text-align: left;
+  }
+  .textLogo2 h6 {
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .footer2 {
+    justify-content: left;
+    align-items: flex-start;
+    margin-left: 30px;
+  }
+  .listExplore {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .listExplore h6 {
+    padding-right: 50px;
+  }
+  .explore h1 {
+    font-size: 18px;
+  }
+  .ourSponsor h1 {
+    font-size: 18px;
+  }
+
+  .footer3 {
+    justify-content: center;
+    align-items: center;
+  }
+  .sosmed h1 {
+    font-size: 18px;
+  }
+
+  .listSosmed h6 {
+    font-size: 12px;
+  }
+  .ebvId {
+    width: 50%;
+    height: auto;
+    margin-left: 0px;
+    margin-bottom: 0px;
+  }
+
+  .cineone {
+    width: 50%;
+    height: auto;
+    margin-left: 0px;
+    margin-bottom: 0px;
+  }
+  .hiflix {
+    width: 50%;
+    height: auto;
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+
+  .footer4 {
+    justify-content: left;
+    align-items: flex-start;
+    margin-left: 30px;
+  }
+  .listSosmed h6 {
+    display: none;
+  }
+  .logoSosmed {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .facebook,
+  .twitter,
+  .youtube,
+  .instagram {
+    padding-right: 50px;
+  }
+
+  .footer5 p {
+    font-size: 12px;
+  }
+  .footer1,
+  .footer2,
+  .footer3,
+  .footer4 {
+    margin-top: 30px;
+  }
+}
+/* *============Akhir Footer=============== */

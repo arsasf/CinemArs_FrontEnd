@@ -1,0 +1,36 @@
+.rowSeat {
+  /* flex-wrap: nowrap; */
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.colSeat {
+  padding: 1.5px 1.5px;
+  margin: 0px;
+}
+
+span {
+  width: 50px;
+  height: 25px;
+}
+.seat {
+  width: 25px;
+  height: 25px;
+  border-radius: 25%;
+}
+.seat:hover {
+  cursor: pointer;
+}
+
+.seatAvailable {
+  background-color: #d6d8e7;
+}
+
+.seatSelected {
+  background-color: #5f2eea;
+}
+
+.seatSold {
+  background-color: #6e7191;
+}

@@ -65,6 +65,15 @@ class Home extends Component {
         movieName: "",
         movieCategory: "",
         movieReleaseDate: "",
+        movie_casts: "",
+        movie_category: "",
+        movie_created_at: "",
+        movie_directed_by: "",
+        movie_duration: "",
+        movie_id: [],
+        movie_img: "",
+        movie_synopsis: "",
+        movie_updated_at: "",
       },
     });
   };
@@ -196,6 +205,7 @@ class Home extends Component {
               })
             )}
           </Row>
+          <Cards />
           <ReactPaginate
             previousLabel={"prev"}
             nextLabel={"next"}

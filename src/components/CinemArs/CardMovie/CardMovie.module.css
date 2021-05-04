@@ -1,0 +1,142 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+/* ================Content1===================*/
+
+.containerCenter {
+  margin-top: 80px;
+  font-family: "Mulish", sans-serif;
+}
+.content1 {
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.left {
+  margin: auto;
+}
+
+.imgThumbnail {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  height: 450px;
+  width: 320px;
+  padding: 60px;
+  border-radius: 16px;
+  background-color: white;
+}
+
+.right {
+  margin: auto;
+}
+
+.detailsMovie {
+  margin: auto;
+}
+
+.detailsTitle h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #14142b;
+}
+
+.detailsTitle h6 {
+  font-size: 18px;
+  color: #4e4b66;
+}
+
+.detailsTimeActor h6 {
+  color: #8692a6;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.dateDuration {
+  margin-right: 10%;
+}
+
+.detailsTimeActor h1 {
+  color: #121212;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.right span {
+  width: 100%;
+  height: 1px;
+  background-color: #dedede;
+}
+
+.synopsis h1 {
+  font-size: 20px;
+  color: #000000;
+}
+
+.synopsis h6 {
+  font-size: 16px;
+  color: #4e4b66;
+}
+/* Akhir content1========================== */
+
+@media (max-width: 575.98px) {
+  .content1 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .left {
+    margin-top: 20px;
+  }
+  .imgThumbnail {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    height: 250px;
+    width: 180px;
+    padding: 20px;
+    border-radius: 16px;
+    background-color: white;
+  }
+
+  .detailsTitle h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #14142b;
+  }
+
+  .detailsTitle h6 {
+    font-size: 14px;
+    color: #4e4b66;
+  }
+
+  .detailsTimeActor h6 {
+    color: #8692a6;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .dateDuration {
+    margin-right: 10%;
+  }
+
+  .detailsTimeActor h1 {
+    color: #121212;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .right span {
+    width: 100%;
+    height: 1px;
+    background-color: #dedede;
+  }
+
+  .synopsis h1 {
+    font-size: 20px;
+    color: #000000;
+  }
+
+  .synopsis h6 {
+    font-size: 13px;
+    color: #4e4b66;
+  }
+}

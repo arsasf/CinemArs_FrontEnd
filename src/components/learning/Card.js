@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Button, Card } from "react-bootstrap";
-import styles from "./Card.module.css";
+import styles from "../CinemArs/Card/Card.module.css";
 import { withRouter } from "react-router-dom";
 
 class Cards extends Component {
