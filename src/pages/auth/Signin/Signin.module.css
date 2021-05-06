@@ -1,0 +1,169 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+.columnLeft {
+  background-color: #4415c5d7;
+  padding: 0;
+}
+
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 20%;
+}
+
+.logoResponsive {
+  display: none;
+}
+.tickitz {
+  position: relative;
+  width: 50%;
+  margin-top: 250px;
+  margin-left: 230px;
+}
+
+.titleWait {
+  position: relative;
+  font-family: "Inter", sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  text-align: center;
+  color: white;
+}
+
+.columnRight {
+  padding-right: 50px;
+}
+
+.right {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding-bottom: 20px;
+}
+
+.form {
+  padding-bottom: 20px;
+}
+
+.titleSignIn {
+  font-family: "Inter", sans-serif;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 58px;
+  letter-spacing: 0.003em;
+  text-align: left;
+}
+
+.textSignIn {
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  text-align: left;
+}
+
+.email,
+.password {
+  font-size: 15px;
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+.placeholder {
+  font-family: "Mulish", sans-serif;
+  height: 45px;
+  border-radius: 3px;
+  font-size: 13px;
+}
+
+.placeholder:focus,
+.placeholder:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #5f2eea;
+}
+.buttonSignIn {
+  margin-top: 20px;
+  font-family: "Mulish", sans-serif;
+  height: 45px;
+  border-radius: 3px;
+  width: 100%;
+  background-color: #5f2eea;
+  border-color: #5f2eea;
+}
+
+.forgotPassword {
+  text-align: center;
+}
+
+.reset {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  justify-content: center;
+}
+
+.linkReset {
+  color: #5f2eea;
+  margin-left: 10px;
+}
+
+.or {
+  margin-top: 20px;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
+}
+
+.line {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 1px;
+  border-radius: 5px;
+  background-color: #e5e5e5;
+}
+
+.toggleButtonGroup {
+  margin-top: 20px;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentButton {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+}
+
+.titleButton {
+  background-color: white;
+  border-color: white;
+  border-radius: 5px;
+  color: #a0a3bd;
+  font-family: "Mulish", sans-serif;
+  font-size: 15px;
+  text-align: center;
+}
+
+@media (max-width: 991.98px) {
+  .logoResponsive {
+    display: block;
+    margin-top: 20px;
+  }
+
+  .columnLeft {
+    display: none;
+  }
+}

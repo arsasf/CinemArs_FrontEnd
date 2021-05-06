@@ -14,6 +14,7 @@ class Home extends Component {
         movieName: "",
         movieCategory: "",
         movieReleaseDate: "",
+        image: null,
       },
       data: [],
       pagination: {},
@@ -79,12 +80,30 @@ class Home extends Component {
     });
   };
 
+  handleImage = (event) => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        image: event.target.files[0],
+      },
+    });
+  };
+
   submitData = (event) => {
     event.preventDefault();
     console.log("Save data!");
-    console.log(this.state.form);
+    // console.log(this.state.form); //digunakan untuk create data yang hanya berisikan data selain file
+    const formData = new FormData(); //formData digunakan untuk menghandle inputan yang memiliki file upload di dalamnya
+    formData.append("movieName", this.state.form.movieName);
+    formData.append("movieCategory", this.state.form.movieCategory);
+    formData.append("movieReleaseDate", this.state.form.movieReleaseDate);
+    formData.append("image", this.state.form.image);
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
+
     // proses request post movie
-    // axiosApiIntace.post('movie', form, then(
+    // axiosApiIntace.post('movie', formData, then( //ubah menjadi form data karena proses inputnya memiliki upload file
     // this.getData()
     // this.resetData()
     // )).catch()
@@ -177,6 +196,13 @@ class Home extends Component {
                   name="movieReleaseDate"
                   value={this.state.form.movieReleaseDate}
                   onChange={(event) => this.changeText(event)}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Movie Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  onChange={(event) => this.handleImage(event)}
                 />
               </Form.Group>
               <Button variant="primary" type="reset">
