@@ -12,14 +12,15 @@ class Cards extends Component {
       movie_id,
       movie_name,
       movie_category,
-      movie_img,
-    } = this.props.dataNowMonth;
+      movie_image,
+    } = this.props.data;
+    console.log(movie_image);
     return (
       <>
         <Card className={`${styles.cardBody} `}>
           <Card.Img
             variant="top"
-            src={movie_img}
+            src={`http://localhost:3001/api/${movie_image}`}
             className={styles.cardImage}
           />
           <Card.Body className={styles.cardContent}>

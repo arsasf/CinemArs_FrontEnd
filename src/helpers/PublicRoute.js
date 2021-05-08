@@ -8,7 +8,7 @@ const PublicRoute = ({ component: Component, restricted, ...rest }) => {
       {...rest}
       render={(props) =>
         isAuthenticated && restricted ? (
-          <Redirect to="/learning/basic-home" />
+          <Redirect to="/cinemars/home" />
         ) : (
           <Component {...props} />
         )

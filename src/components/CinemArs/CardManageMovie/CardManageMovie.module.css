@@ -1,0 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+.dataCardMovie {
+  justify-content: center;
+  align-items: center;
+}
+
+.cardImage {
+  width: 159px;
+  height: 244px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-family: "Mulish", sans-serif;
+}
+
+.cardBody {
+  padding-top: 25px;
+  padding-bottom: 10px;
+  align-items: center;
+  width: 210px;
+  height: auto;
+  background-color: white;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.cardButton {
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  height: 25px;
+}
+.text {
+  color: #969abb;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 12px;
+}
+
+.update {
+  width: 130px;
+  background-color: white !important;
+  color: #5f2eea !important;
+  border: 1px solid #5f2eea !important;
+}
+Button.update:hover,
+Button.update:active,
+Button.update:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: #5f2eea !important;
+  color: white !important;
+  border-color: #5f2eea !important;
+}
+
+.delete {
+  width: 130px;
+  background-color: white !important;
+  color: #ed2e7e !important;
+  border-color: #ed2e7e !important;
+}
+Button.delete:hover,
+Button.delete:active,
+Button.delete:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: #ed2e7e !important;
+  color: white !important;
+  border-color: #ed2e7e !important;
+}
+@media (max-width: 991.98px) {
+  .cardBody {
+    padding-top: 10px;
+    align-items: center;
+    width: 100%;
+  }
+  .title {
+    font-size: 13px;
+  }
+}

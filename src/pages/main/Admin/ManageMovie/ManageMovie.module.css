@@ -1,0 +1,348 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+.adminManageMovie {
+  font-family: "Mulish", sans-serif;
+  margin-top: 90px;
+  background-color: #eaebee;
+  padding-bottom: 5px;
+}
+
+.titleFormMovie {
+  height: 90px;
+  align-items: flex-end;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 0.25px;
+  text-align: left;
+  margin-bottom: 1px;
+}
+
+.containerMangeMovie {
+  margin-top: 2px;
+  background-color: white;
+  border-radius: 5px;
+}
+.contentFormMovie {
+  height: max-content;
+  padding-top: 40px;
+  justify-content: space-evenly;
+}
+.rowTitle {
+  height: 70px;
+  background-color: #eaebee;
+  align-items: flex-end;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 0.25px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.rowFormMovieImage {
+  border: 1px solid whitesmoke;
+  height: max-content;
+  padding-top: 15px;
+  height: 280px;
+  width: 210px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.formMovieImage {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1px;
+  height: 237px;
+  width: 177px;
+  background-color: white;
+}
+
+.form {
+  width: 100%;
+}
+.colDuration {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.titleFormLabelMovie {
+  font-size: 15px;
+  font-weight: 600;
+}
+.placeholder {
+  height: 45px;
+  border-radius: 3px;
+  font-size: 13px;
+}
+
+.placeholder:focus,
+.placeholder:active,
+.placeholder option:focus,
+.placeholder option:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #5f2eea;
+}
+
+.formSynopsis {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  justify-content: center;
+}
+
+.colSynopsis {
+  width: 92%;
+}
+
+.rowButton {
+  justify-content: flex-end;
+  padding-bottom: 40px;
+}
+
+.buttonReset {
+  height: 45px;
+  width: 180px;
+  border-radius: 3px;
+  margin-right: 45px;
+  background-color: white;
+  color: #5f2eea;
+  border: 2px solid #5f2eea;
+  font-size: 16px;
+  font-weight: 700;
+}
+.buttonReset:hover,
+.buttonReset:active,
+.buttonReset:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  font-weight: lighter;
+}
+.buttonSubmit {
+  height: 45px;
+  width: 180px;
+  border-radius: 3px;
+  margin-right: 45px;
+  font-size: 16px;
+  font-weight: lighter;
+  background-color: #5f2eea;
+  color: white;
+  border: 2px solid #5f2eea;
+}
+
+.buttonSubmit:hover,
+.buttonSubmit:active,
+.buttonSubmit:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.createDataToast {
+  width: 100%;
+  margin-right: 17%;
+  position: absolute;
+  background-color: #5f2eea;
+  color: white;
+  font-size: 16px;
+  border: 2px solid #5f2eea;
+}
+
+.titleDataMovie {
+  height: 45px;
+}
+
+.sort {
+  height: 45px;
+}
+
+.dropdownSort {
+  margin-left: 30px;
+}
+.titleSort {
+  padding-left: 10px;
+  height: 45px;
+  width: 132px;
+  border-radius: 15px;
+  font-weight: lighter;
+  color: #4e4b66;
+  border: 3px solid #dedede;
+  background-color: white;
+}
+
+.listSort {
+  border-radius: 3px;
+  font-weight: lighter;
+  color: #4e4b66;
+}
+.titleSort:hover,
+.titleSort:active,
+.titleSort:focus,
+.listSort:hover,
+.listSort:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 3px solid #dedede;
+  border-radius: 15px;
+  color: white;
+  font-weight: lighter;
+  background-color: #5f2eea;
+}
+
+.titleSort::after {
+  margin-left: 50px;
+}
+
+.menuDropdown {
+  border: 3px solid #dedede;
+  border-radius: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+}
+
+.search {
+  height: 45px;
+}
+
+.menuSearch {
+  margin-left: 30px;
+}
+
+.placeholderSearch {
+  background-color: white;
+  color: #4e4b66;
+  font-style: italic;
+  height: 45px;
+  width: 200px;
+  border-radius: 15px;
+  font-size: 15px;
+  border: 3px solid #dedede;
+}
+.placeholderSearch:hover,
+.placeholderSearch:focus,
+.placeholderSearch:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: 3px solid #ed2e7e;
+}
+
+.containerCardMovie {
+  margin-top: 2px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.dataCardMovie {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  justify-content: space-between;
+  width: auto;
+}
+
+.titleCardMovie {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  height: max-content;
+  justify-content: space-around;
+}
+
+.pagination {
+  margin: 15px auto;
+  display: flex;
+  font-size: 15px;
+  list-style: none;
+  outline: none;
+}
+.pagination > .active > a {
+  background-color: #5f2eea;
+  border-color: #5f2eea;
+  color: #fff;
+}
+.pagination > li > a {
+  border: 1px solid #5f2eea;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+  background-color: white;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: #5f2eea;
+  border-color: #5f2eea;
+  outline: none;
+}
+.pagination > li > a,
+.pagination > li > span {
+  color: #5f2eea;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-radius: unset;
+}
+@media (max-width: 991.98px) {
+  .form {
+    padding-top: 10px;
+    width: 90%;
+    margin: auto;
+  }
+  .contentFormMovie {
+    padding-top: 20px;
+  }
+  .colDuration {
+    padding-top: 10px;
+    margin-left: 23px;
+    margin-right: 23px;
+  }
+  .colSynopsis {
+    margin-top: -20px;
+    width: 90%;
+  }
+  .rowFormMovieImage {
+    margin: auto;
+  }
+  .rowButton {
+    margin-bottom: 20px;
+  }
+  .buttonReset {
+    margin-right: 0px;
+  }
+  .buttonSubmit {
+    margin-right: 0px;
+  }
+  .rowButton {
+    justify-content: space-around;
+  }
+  .dropdownSort {
+    margin-left: 0px;
+    margin-right: auto;
+  }
+  .titleSort {
+    height: 35px;
+    font-size: 13px;
+    width: 30%;
+  }
+
+  .menuSearch {
+    margin-left: 0px;
+    margin-right: auto;
+  }
+  .placeholderSearch {
+    height: 35px;
+    width: 50%;
+  }
+  .containerCardMovie {
+    margin-top: 80px;
+  }
+}

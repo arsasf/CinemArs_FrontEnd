@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axiosApiIntances from "../../../utils/axios";
+import { getAllMovie } from "../../../redux/actions/manageMovie";
+import { connect } from "react-redux";
 import styles from "./Home.module.css";
 import NavBar from "../../../components/CinemArs/Navbar/Navbar";
 import Footer from "../../../components/CinemArs/Footer/Footer";
@@ -25,7 +27,7 @@ class Home extends Component {
         movieId: "",
         movieName: "",
         movieCategory: "",
-        movieImg: "",
+        image: null,
         movieReleaseDate: "",
       },
       data: [],
@@ -60,7 +62,6 @@ class Home extends Component {
         `movie?page=${page}&limit=${limit}&sort= ${sort}&searchByName=${searchByName}&month=${monthUpcoming}`
       )
       .then((res) => {
-        console.log(res.data.data);
         this.setState({
           data: res.data.data,
           paginationUpcoming: res.data.pagination,
@@ -71,22 +72,34 @@ class Home extends Component {
       });
   };
 
+  handleImage = (event) => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        image: event.target.files[0],
+      },
+    });
+  };
+
   getDataNowMonth = () => {
-    console.log("Get Data !");
-    const { page, limit, sort, searchByName, month } = this.state;
-    axiosApiIntances
-      .get(
-        `movie?page=${page}&limit=${limit}&sort= ${sort}&searchByName=${searchByName}&month=${month}`
-      )
-      .then((res) => {
-        this.setState({
-          dataNowMonth: res.data.data,
-          pagination: res.data.pagination,
-        });
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
+    console.log("Get Data nowMonth !");
+    console.log(this.props);
+    const { page, limit, searchByName, sort, month } = this.state;
+    this.props.getAllMovie(page, limit, searchByName, sort, month);
+
+    // axiosApiIntances
+    //   .get(
+    //     `movie?page=${page}&limit=${limit}&sort= ${sort}&searchByName=${searchByName}&month=${month}`
+    //   )
+    //   .then((res) => {
+    //     this.setState({
+    //       dataNowMonth: res.data.data,
+    //       pagination: res.data.pagination,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.response);
+    //   });
   };
 
   handleMovieShowingClick = () => {
@@ -157,9 +170,9 @@ class Home extends Component {
   };
 
   render() {
-    console.log(this.state.month);
-    console.log(this.state.monthUpcoming);
-    const totalDataShowing = this.state.pagination.totalData;
+    console.log(this.props.manageMovie.data);
+    // console.log(this.state.monthUpcoming);
+    const totalDataShowing = this.props.manageMovie.pagination.totalData;
     const totalDataUpcoming = this.state.paginationUpcoming.totalData;
 
     return (
@@ -220,10 +233,10 @@ class Home extends Component {
                   </Link>
                 </Row>
                 <Row className={styles.rowCardImage}>
-                  {this.state.dataNowMonth.map((item, index) => {
+                  {this.props.manageMovie.data.map((item, index) => {
                     return (
                       <Col md={2} key={index} className={styles.colCardImage}>
-                        <CardImage dataNowMonth={item} />
+                        <CardImage data={item} />
                       </Col>
                     );
                   })}
@@ -411,4 +424,11 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+  manageMovie: state.manageMovie,
+  auth: state.auth,
+});
+
+const mapDispatchToProps = { getAllMovie };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

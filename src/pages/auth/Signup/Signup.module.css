@@ -1,11 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
 
-.pageSignIn {
+.pageSignUp {
   height: max-content;
 }
 .columnLeft {
-  /* background-color: #4415c5d7; */
   background-color: rgba(43, 21, 107, 0.8);
   padding: 0;
   height: 800px;
@@ -24,30 +23,141 @@
 }
 .tickitz {
   position: relative;
-  width: 50%;
-  margin-top: 35%;
-  margin-left: 25%;
+  width: 30%;
+  margin-top: 10%;
+  margin-bottom: 50px;
+  margin-left: 120px;
+  margin-right: auto;
 }
 
 .titleWait {
+  width: 70%;
   position: relative;
   font-family: "Inter", sans-serif;
   font-size: 40px;
   font-weight: 400;
-  text-align: center;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
   color: white;
-  margin-bottom: 213px;
+}
+.textLoyal {
+  position: relative;
+  width: 70%;
+  font-size: 25px;
+  font-family: "Mulish", sans-serif;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 20px;
+}
+.columnRound {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 107px;
+}
+.rowRound {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Mulish", sans-serif;
+}
+
+.textRound {
+  font-family: "Mulish", sans-serif;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 20px;
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.rounded1:hover,
+.rounded1:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: white;
+  color: black;
+  border-color: white;
+}
+.rounded2:hover,
+.rounded2:focus,
+.rounded3:hover,
+.rounded3:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: transparent;
+  border-color: white;
+  color: white;
+}
+.roundedLine:hover,
+.roundedLine:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: white;
+  border-color: white;
+}
+.rounded1 {
+  text-align: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  padding: 0;
+  margin: 0;
+  color: black;
+  background-color: white;
+  border-color: white;
+}
+
+.rounded2 {
+  text-align: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  padding: 0;
+  margin: 0;
+  color: white;
+  background-color: transparent;
+  border-color: white;
+}
+
+.rounded3 {
+  text-align: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  padding: 0;
+  margin: 0;
+  color: white;
+  background-color: transparent;
+  border-color: white;
+}
+
+.rowRoundLine {
+  width: 65%;
+}
+.roundedLine {
+  margin-right: 10px;
+  width: 2px;
+  height: 50px;
+  background-color: white;
 }
 
 .columnRight {
   padding-right: 50px;
   margin-top: auto;
   margin-bottom: auto;
-  height: max-content;
+  padding-bottom: auto;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
 }
-
 .right {
-  margin-bottom: 0px;
   padding-bottom: 20px;
 }
 
@@ -55,21 +165,13 @@
   padding-bottom: 20px;
 }
 
-.titleSignIn {
+.titleFill {
   font-family: "Inter", sans-serif;
-  font-size: 40px;
+  font-size: 26px;
   font-style: normal;
   font-weight: 600;
   line-height: 58px;
   letter-spacing: 0.003em;
-  text-align: left;
-}
-
-.textSignIn {
-  font-family: "Mulish", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
   text-align: left;
 }
 
@@ -93,7 +195,7 @@
   box-shadow: none !important;
   border-color: #5f2eea;
 }
-.buttonSignIn {
+.buttonJoin {
   margin-top: 20px;
   font-family: "Mulish", sans-serif;
   height: 45px;
@@ -103,11 +205,12 @@
   border-color: #5f2eea;
 }
 
-.forgotPassword {
+.haveAccount {
   text-align: center;
+  color: #a0a3bd;
 }
 
-.reset {
+.logIn {
   font-family: "Inter", sans-serif;
   font-size: 15px;
   font-style: normal;
@@ -115,12 +218,12 @@
   justify-content: center;
 }
 
-.linkReset {
+.linkLogIn {
   color: #5f2eea;
   margin-left: 10px;
 }
 
-.linkReset:hover {
+.linkLogIn:hover {
   color: #5f2eea;
 }
 
@@ -175,6 +278,7 @@
   .logoResponsive {
     display: block;
     margin-top: 20px;
+    margin-bottom: 50px;
   }
 
   .columnLeft {

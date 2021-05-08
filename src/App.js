@@ -14,11 +14,13 @@ import Login from "./pages/auth/Login/Login";
 // =====================End=================================
 
 // ======================Page CinemArs=====================
+import Signup from "./pages/auth/Signup/Signup";
 import Signin from "./pages/auth/Signin/Signin";
 import Home from "./pages/main/Home/Home";
 import MovieDetail from "./pages/main/MovieDetail/MovieDetail";
 import Order from "./pages/main/Order/Order";
 import Payment from "./pages/main/Payment/Payment";
+import ManageMovie from "./pages/main/Admin/ManageMovie/ManageMovie";
 // ========================End=============================
 
 // ========================Component CinemArs===============
@@ -59,8 +61,14 @@ class App extends Component {
             {/* ======================End============================ */}
 
             {/* ======================Page CinemArs================== */}
-            <Route path="/signin" exact component={Signin} />
-            <Route path="/cinemars/home" exact component={Home} />
+            <PublicRoute
+              restricted={true}
+              path="/signin"
+              exact
+              component={Signin}
+            />
+            <Route path="/signup" exact component={Signup} />
+            <PrivateRoute path="/cinemars/home" exact component={Home} />
             <Route
               path="/cinemars/movie-detail/:id"
               exact
@@ -68,6 +76,11 @@ class App extends Component {
             />
             <Route path="/cinemars/Order" exact component={Order} />
             <Route path="/cinemars/payment" exact component={Payment} />
+            <Route
+              path="/cinemars/manage-movie"
+              exact
+              component={ManageMovie}
+            />
             {/* =======================End========================= */}
 
             {/* ====================Component CinemArs============= */}

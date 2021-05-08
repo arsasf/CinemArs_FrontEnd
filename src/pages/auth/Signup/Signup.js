@@ -10,20 +10,21 @@ import {
   ToggleButton,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import styles from "./Signin.module.css";
+import styles from "./Signup.module.css";
 import google from "../../../assets/img/google.png";
 import facebook from "../../../assets/img/facebook.png";
 import background from "../../../assets/img/full-background-avangers.png";
 import tickitz from "../../../assets/img/logo_signIn.png";
 import tickitz2 from "../../../assets/img/Tickitz.png";
 import { connect } from "react-redux";
-import { login } from "../../../redux/actions/auth";
+import { register } from "../../../redux/actions/auth";
 
-class Signin extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
       form: {
+        userName: "",
         userEmail: "",
         userPassword: "",
       },
@@ -39,42 +40,87 @@ class Signin extends Component {
     });
   };
 
-  handleLogin = (event) => {
+  handleRegister = (event) => {
     event.preventDefault();
     console.log(this.state.form);
-    this.props.login(this.state.form).then((result) => {
-      console.log(this.props.auth.data.token);
-      localStorage.setItem("token", this.props.auth.data.token);
-      this.props.history.push("/cinemars/home");
+    this.props.register(this.state.form).then((result) => {
+      console.log(this.props.auth.data);
+      this.props.history.push("/signin");
     });
   };
-
   render() {
-    const { userEmail, userPassword } = this.state;
+    console.log(this.state);
+    const { userName, userEmail, userPassword } = this.state;
     return (
       <>
-        <section className={styles.pageSignIn}>
+        <section className={styles.pageSignUp}>
+          {/* <!-- =============Isi content=================== --> */}
+          {/* <!-- bootstrap grid --> */}
           <Container fluid className={styles.container}>
             <Row>
+              {/* <!-- Kolom kiri --> */}
               <Col lg={8} className={styles.columnLeft}>
                 <Image src={background} className={styles.background} />
                 <Image src={tickitz} className={styles.tickitz} />
-                <p className={styles.titleWait}>Wait, watch, wow!</p>
+                <p className={styles.titleWait}>Lets build your account</p>
+                <p className={styles.textLoyal}>
+                  To be a loyal moviegoer and access all of features, your
+                  details are required.
+                </p>
+                <Col className={styles.columnRound}>
+                  <Row className={styles.rowRound}>
+                    <Button variant="#fff" className={styles.rounded1}>
+                      1
+                    </Button>
+                    <p className={styles.textRound}>
+                      Fill your additional details
+                    </p>
+                  </Row>
+                  <Row className={styles.rowRoundLine}>
+                    <span className={styles.roundedLine}></span>
+                  </Row>
+                  <Row className={styles.rowRound}>
+                    <Button variant="#fff" className={styles.rounded2}>
+                      2
+                    </Button>
+                    <p className={styles.textRound}>Activate your account</p>
+                  </Row>
+                  <Row className={styles.rowRoundLine}>
+                    <span className={styles.roundedLine}></span>
+                  </Row>
+                  <Row className={styles.rowRound}>
+                    <Button variant="#fff" className={styles.rounded3}>
+                      3
+                    </Button>
+                    <p className={styles.textRound}>Done</p>
+                  </Row>
+                </Col>
               </Col>
+              {/* <!-- Akhir kolom kiri --> */}
+
+              {/* <!-- Kolom Kanan --> */}
               <Col lg={4} className={styles.columnRight}>
                 <Image src={tickitz2} className={styles.logoResponsive} />
                 <Container className={styles.right}>
-                  <Form className={styles.form} onSubmit={this.handleLogin}>
-                    <Form.Group controlId="formBasicEmail">
-                      <Form.Label className={styles.titleSignIn}>
-                        Sign In
+                  <Form className={styles.form} onSubmit={this.handleRegister}>
+                    <Form.Group>
+                      <Form.Label className={styles.titleFill}>
+                        Fill your addtional details
                       </Form.Label>
-                      <Form.Text
-                        className={`${styles.textSignIn} text-muted mb-5`}
-                      >
-                        Sign in with your data that you entered during your
-                        regitstration
-                      </Form.Text>
+                    </Form.Group>
+                    <Form.Group
+                      controlId="formBasicUserName"
+                      className={styles.email}
+                    >
+                      <Form.Label>Username</Form.Label>
+                      <Form.Control
+                        className={styles.placeholder}
+                        type="text"
+                        placeholder="Write your username"
+                        name="userName"
+                        value={userName}
+                        onChange={(event) => this.changeText(event)}
+                      />
                     </Form.Group>
                     <Form.Group
                       controlId="formBasicEmail"
@@ -90,7 +136,6 @@ class Signin extends Component {
                         onChange={(event) => this.changeText(event)}
                       />
                     </Form.Group>
-
                     <Form.Group controlId="formBasicPassword">
                       <Form.Label className={styles.password}>
                         Password
@@ -105,18 +150,18 @@ class Signin extends Component {
                       />
                     </Form.Group>
                     <Button
-                      className={styles.buttonSignIn}
+                      className={styles.buttonJoin}
                       variant="dark"
                       type="submit"
                     >
-                      Sign In
+                      Join for free now
                     </Button>
                   </Form>
-                  <Col className={styles.forgotPassword}>
-                    <Row className={styles.reset}>
-                      Forgot your password?
-                      <Link to="#" className={styles.linkReset}>
-                        Reset now
+                  <Col className={styles.haveAccount}>
+                    <Row className={styles.logIn}>
+                      Do you already have an account?
+                      <Link to="#" className={styles.linkLogIn}>
+                        Log in
                       </Link>
                     </Row>
                     <Row className={styles.or}>
@@ -178,6 +223,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-const mapDispatchToProps = { login };
+const mapDispatchToProps = { register };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signin);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

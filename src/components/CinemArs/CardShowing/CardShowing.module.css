@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
 
 .cardImage {
-  width: 90%;
+  width: 159px;
+  height: 244px;
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 10px;
