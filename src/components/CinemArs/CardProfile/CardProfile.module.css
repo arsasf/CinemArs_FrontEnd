@@ -1,0 +1,320 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+.profilePage {
+  margin-top: 90px;
+  font-family: "Mulish", sans-serif;
+  background-color: #eaebee;
+}
+
+/* .left {
+  background-color: brown;
+} */
+
+/* .right {
+  background-color: cadetblue;
+} */
+
+/* .biodataForm {
+  background-color: chartreuse;
+} */
+
+.containerCard {
+  padding-left: 0;
+}
+.containerForm {
+  padding-right: 0;
+}
+
+.colForm {
+  background-color: white;
+  border-radius: 5px;
+}
+.contentForm {
+  height: max-content;
+  padding-top: 40px;
+  justify-content: space-evenly;
+  padding-bottom: 30px;
+}
+.rowTitle {
+  height: 70px;
+  background-color: #eaebee;
+  align-items: flex-end;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 0.25px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.rowFormMovieImage {
+  border: 1px solid whitesmoke;
+  height: max-content;
+  padding-top: 15px;
+  height: 280px;
+  width: 210px;
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  width: 100%;
+}
+
+.titleFormLabelMovie {
+  font-size: 15px;
+  font-weight: 600;
+}
+.placeholder {
+  height: 45px;
+  border-radius: 3px;
+  font-size: 13px;
+}
+
+.codeRegion {
+  height: 45px;
+  border-radius: 3px;
+  font-size: 15px;
+}
+
+.placeholder:focus,
+.placeholder:active,
+.placeholder option:focus,
+.placeholder option:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #5f2eea;
+}
+
+.DetailsInformation {
+  margin-top: 20px;
+  padding-top: 30px;
+  justify-content: start;
+}
+
+.titleDetailsInformation {
+  margin-left: 40px;
+  text-align: left;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.line {
+  background-color: #dedede;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 1px;
+}
+.rowButton {
+  margin-top: 20px;
+  justify-content: flex-start;
+  padding-bottom: 40px;
+}
+
+.rowHeaderCard {
+  border-radius: 5px;
+  margin-top: 50px;
+  justify-content: space-between;
+  /* padding-bottom: 20px; */
+  align-items: center;
+  background-color: white;
+}
+
+.rowHeaderInfoCard {
+  width: 100%;
+  margin-left: 0;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 40px;
+}
+
+.rowHeaderInfoCard2 {
+  width: 100%;
+  align-items: center;
+}
+
+.imageProfile {
+  margin-bottom: 8%;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+  margin-left: 20%;
+  margin-right: auto;
+  background-color: #eaebee;
+}
+
+.userFullName {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 15px;
+  font-weight: 600;
+  justify-content: center;
+}
+
+.userStatus {
+  margin-top: 10px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 14px;
+  font-weight: 400;
+  color: #9e9e9e;
+  justify-content: center;
+}
+.rowHeader {
+  border-radius: 5px;
+  margin-top: 50px;
+  height: 70px;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+}
+
+.infoCard {
+  margin-top: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
+  text-decoration: none;
+  color: black;
+  height: 40px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.linkProfile {
+  margin-top: 20px;
+  margin-left: 40px;
+  text-decoration: none;
+  color: #bdbdbd;
+  height: 40px;
+  font-size: 17px;
+}
+
+.linkProfile:active,
+.linkProfile:focus,
+.linkProfile:hover {
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  color: black;
+  border-bottom: 5px solid #5f2eea;
+}
+
+.infoCard:active,
+.infoCard:focus,
+.infoCard:hover {
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  color: black;
+  border-bottom: 5px solid #5f2eea;
+}
+
+.buttonSubmit {
+  height: 45px;
+  width: 40%;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: lighter;
+  background-color: #5f2eea;
+  color: white;
+  border: 2px solid #5f2eea;
+}
+
+.buttonSubmit:hover,
+.buttonSubmit:active,
+.buttonSubmit:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.createDataToast {
+  width: 100%;
+  height: 100px;
+  margin-right: 17%;
+  position: absolute;
+  background-color: #5f2eea;
+  color: white;
+  font-size: 16px;
+  border: 2px solid #5f2eea;
+}
+
+.bodyToast {
+  margin-top: 15px;
+}
+
+.createUpdateToast {
+  width: 100%;
+  margin-right: 17%;
+  position: absolute;
+  background-color: #5f2eea;
+  color: white;
+  font-size: 16px;
+  border: 2px solid #5f2eea;
+}
+
+.dropdownSort {
+  margin-right: 40px;
+}
+.titleSort {
+  font-size: 20px;
+  font-weight: 900;
+  color: #5f2eea;
+  background-color: white;
+}
+
+.listSort {
+  border-radius: 3px;
+  font-weight: lighter;
+  color: #4e4b66;
+}
+.titleSort:hover,
+.titleSort:active,
+.titleSort:focus,
+.listSort:hover,
+.listSort:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: #5f2eea;
+  color: white;
+}
+
+.titleSort::after {
+  display: none;
+}
+
+.menuDropdown {
+  border: 3px solid #dedede;
+  border-radius: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: white;
+}
+
+/* =====================Responsive */
+@media (max-width: 991.98px) {
+  .rowHeaderInfoCard {
+    margin-left: auto;
+  }
+  .containerCard {
+    margin-left: 20px;
+  }
+
+  .form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+  }
+
+  .containerForm {
+    padding-right: 13px;
+  }
+
+  .imageProfile {
+    margin-left: 27%;
+  }
+}

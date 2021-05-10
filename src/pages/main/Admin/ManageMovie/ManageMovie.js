@@ -2,9 +2,10 @@ import { Component } from "react";
 import {
   getAllMovie,
   createMovie,
+  updateMovie,
+  deleteMovie,
 } from "../../../../redux/actions/manageMovie";
 import { connect } from "react-redux";
-// import axiosApiIntances from "../../../../utils/axios";
 import styles from "./ManageMovie.module.css";
 import Navbar from "../../../../components/CinemArs/Navbar/Navbar";
 import Footer from "../../../../components/CinemArs/Footer/Footer";
@@ -31,11 +32,10 @@ class ManageMovie extends Component {
         movieReleaseDate: "",
         movieCasts: "",
         movieDirectedBy: "",
-        movieDurationHours: 0,
-        movieDurationMinutes: 0,
-        movieId: [],
+        movieDurationHours: "",
+        movieDurationMinutes: "",
         movieSynopsis: "",
-        image: null,
+        image: "Image.not.availabe.png",
       },
       page: 1,
       limit: 4,
@@ -68,7 +68,9 @@ class ManageMovie extends Component {
     this.props
       .getAllMovie(page, limit, searchByName, sort, month)
       .then((res) => {
-        this.props.history.push(`manage-${res.value.config.url}`);
+        this.props.history.push(
+          `/cinemars/manage-movie/manage-${res.value.config.url}`
+        );
       });
   };
 
@@ -98,7 +100,7 @@ class ManageMovie extends Component {
   };
 
   changeText = (event) => {
-    console.log(typeof event.target.value);
+    // console.log(typeof event.target.value);
     this.setState({
       form: {
         ...this.state.form,
@@ -139,7 +141,7 @@ class ManageMovie extends Component {
         movieDurationHours: "",
         movieDurationMinutes: "",
         movieSynopsis: "",
-        image: event.target.files,
+        image: "Image.not.availabe.png",
       },
     });
   };
@@ -176,8 +178,10 @@ class ManageMovie extends Component {
       .createMovie(formData)
       .then((res) => {
         console.log("ini res");
-        console.log(res.value.data.msg);
-        this.getData();
+        console.log(res);
+        this.props.history.push(
+          `/cinemars/manage-movie/${res.value.data.data.id}`
+        );
         this.resetData(event);
       })
       .catch((err) => {
@@ -185,16 +189,23 @@ class ManageMovie extends Component {
       });
   };
 
-  setUpdate = (data) => {
+  setUpdate = (data, event) => {
     console.log("Set Update !");
-    console.log(data);
+    const formData = new FormData();
+    formData.append("image", this.state.form.image);
     this.setState({
       isUpdate: true,
       id: data.movie_id,
       form: {
         movieName: data.movie_name,
-        movieCategory: data.movie_category,
+        movieDirectedBy: data.movie_directed_by,
         movieReleaseDate: data.movie_release_date.slice(0, 10),
+        movieCategory: data.movie_category,
+        movieCasts: data.movie_casts,
+        movieDurationHours: data.movie_duration,
+        movieDurationMinutes: data.movie_duration,
+        movieSynopsis: data.movie_synopsis,
+        image: data.movie_image,
       },
     });
   };
@@ -202,25 +213,49 @@ class ManageMovie extends Component {
   updateData = (event) => {
     event.preventDefault();
     console.log("Update Data !");
-    console.log(this.state.id);
-    console.log(this.state.form);
+    const { id } = this.state;
     this.setState({ isUpdate: false });
     this.resetData(event);
-    // proses request patch movie
-    // axiosApiIntace.patch('movie/${id}', form, then(
-    // this.getData()
-    // this.resetData()
-    // )).catch()
+    const formData = new FormData();
+    formData.append("movieName", this.state.form.movieName);
+    formData.append("movieDirectedBy", this.state.form.movieDirectedBy);
+    formData.append("movieReleaseDate", this.state.form.movieReleaseDate);
+    formData.append("movieCategory", this.state.form.movieCategory);
+    formData.append("movieCasts", this.state.form.movieCasts);
+    formData.append("movieDurationHours", this.state.form.movieDurationHours);
+    formData.append(
+      "movieDurationMinutes",
+      this.state.form.movieDurationMinutes
+    );
+    formData.append("movieSynopsis", this.state.form.movieSynopsis);
+    formData.append("image", this.state.form.image);
+    this.props
+      .updateMovie(id, formData)
+      .then((res) => {
+        console.log("ini res");
+        console.log(res);
+        this.props.history.push(`/cinemars/manage-${res.value.config.url}`);
+        this.resetData(event);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
   };
 
   deleteData = (id) => {
     console.log("Delete Data !");
     console.log(id);
-    // proses request delete movie
-    // axiosApiIntace.delete('movie/${id}', then(
-    // this.getData()
-    // this.resetData()
-    // )).catch()
+    this.props
+      .deleteMovie(id)
+      .then((res) => {
+        console.log("ini res");
+        console.log(res);
+        this.getData();
+        this.resetData();
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
   };
 
   handlePageClick = (event) => {
@@ -232,7 +267,7 @@ class ManageMovie extends Component {
 
   render() {
     const { totalpage } = this.props.manageMovie.pagination;
-    // const { isError } = this.props.manageMovie;
+    const { isUpdate } = this.state;
     return (
       <>
         <Navbar />
@@ -245,13 +280,20 @@ class ManageMovie extends Component {
             </Row>
           </Container>
           <Container className={styles.containerMangeMovie}>
-            <Form onSubmit={this.submitData} onReset={this.resetData}>
+            <Form
+              action="/cinemars/manage-movie"
+              onSubmit={isUpdate ? this.updateData : this.submitData}
+              onReset={this.resetData}
+            >
               <Row className={styles.contentFormMovie}>
                 <Col lg={2}>
                   <Form.Group className={styles.form}>
                     <Row className={`${styles.rowFormMovieImage}`}>
                       <Col>
-                        <Image src="#" className={styles.formMovieImage} />
+                        <Image
+                          src={`http://localhost:3001/api/${this.state.form.image}`}
+                          className={styles.formMovieImage}
+                        />
                       </Col>
                       <Col>
                         <Form.Control
@@ -342,7 +384,7 @@ class ManageMovie extends Component {
                             </Form.Label>
                             <Form.Control
                               className={styles.placeholder}
-                              placeholder="Input Number @ex: 1"
+                              placeholder="Input number 0 - 12"
                               name="movieDurationHours"
                               value={this.state.form.movieDurationHours}
                               onChange={(event) => this.changeText(event)}
@@ -356,7 +398,7 @@ class ManageMovie extends Component {
                             </Form.Label>
                             <Form.Control
                               className={styles.placeholder}
-                              placeholder="Input Number @ex: 10"
+                              placeholder="Input number 0 - 59"
                               name="movieDurationMinutes"
                               value={this.state.form.movieDurationMinutes}
                               onChange={(event) => this.changeText(event)}
@@ -399,7 +441,7 @@ class ManageMovie extends Component {
                   type="submit"
                   onClick={() => this.setShow(true)}
                 >
-                  Submit
+                  {isUpdate ? "Update" : "Submit"}
                 </Button>
                 <Toast
                   className={styles.createDataToast}
@@ -411,7 +453,9 @@ class ManageMovie extends Component {
                   <Toast.Header>
                     <strong className="mr-auto">Message !</strong>
                   </Toast.Header>
-                  <Toast.Body>{this.props.manageMovie.msgCreate}</Toast.Body>
+                  <Toast.Body className={styles.bodyToast}>
+                    {this.props.manageMovie.msg}
+                  </Toast.Body>
                 </Toast>
               </Row>
             </Form>
@@ -434,31 +478,35 @@ class ManageMovie extends Component {
                   <Dropdown.Menu className={styles.menuDropdown}>
                     <Dropdown.Item
                       className={styles.listSort}
-                      onClick={() => this.handleSortClick("movie_id ASC")}
+                      onClick={() =>
+                        this.handleSortClick("movie_created_at ASC")
+                      }
                     >
-                      Id Movie A-Z
-                    </Dropdown.Item>
-                    <Dropdown.Item
-                      className={styles.listSort}
-                      onClick={() => this.handleSortClick("movie_id DESC")}
-                    >
-                      Id Movie Z-A
+                      Created A-Z
                     </Dropdown.Item>
                     <Dropdown.Item
                       className={styles.listSort}
                       onClick={() =>
-                        this.handleSortClick("movie_release_date ASC")
+                        this.handleSortClick("movie_created_at DESC")
                       }
                     >
-                      Release Date A-Z
+                      Created Z-A
                     </Dropdown.Item>
                     <Dropdown.Item
                       className={styles.listSort}
                       onClick={() =>
-                        this.handleSortClick("movie_release_date DESC")
+                        this.handleSortClick("movie_updated_at ASC")
                       }
                     >
-                      Release Date Z-A
+                      Updated A-Z
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      className={styles.listSort}
+                      onClick={() =>
+                        this.handleSortClick("movie_updated_at DESC")
+                      }
+                    >
+                      Updated Z-A
                     </Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
@@ -482,7 +530,11 @@ class ManageMovie extends Component {
               {this.props.manageMovie.data.map((item, index) => {
                 return (
                   <Col lg={3} key={index} className={styles.colCardImage}>
-                    <CardManageMovie data={item} />
+                    <CardManageMovie
+                      data={item}
+                      handleUpdate={this.setUpdate.bind(this)}
+                      handleDelete={this.deleteData.bind(this)}
+                    />
                   </Col>
                 );
               })}
@@ -517,6 +569,11 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-const mapDispatchToProps = { getAllMovie, createMovie };
+const mapDispatchToProps = {
+  getAllMovie,
+  createMovie,
+  updateMovie,
+  deleteMovie,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageMovie);

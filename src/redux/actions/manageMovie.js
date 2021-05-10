@@ -15,3 +15,17 @@ export const createMovie = (formData) => {
     payload: axiosApiIntances.post("movie/", formData),
   };
 };
+
+export const updateMovie = (id, formData) => {
+  return {
+    type: "UPDATE_MOVIE",
+    payload: axiosApiIntances.patch(`movie/${id}`, formData),
+  };
+};
+
+export const deleteMovie = (id) => {
+  return {
+    type: "DELETE_MOVIE",
+    payload: axiosApiIntances.delete(`movie/${id}`),
+  };
+};

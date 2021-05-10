@@ -34,22 +34,18 @@ class NavbarCinemars extends Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse className={style.toggle} id="basic-navbar-nav">
               <Nav className={`${style.navLeft} mr-auto`}>
-                <Nav.Link
-                  as={Link}
-                  className={style.textNav}
-                  to="/cinemars/home"
-                >
-                  Home
+                <Nav.Link as={Link} className={style.textNav} to="#">
+                  Dashboard
                 </Nav.Link>
                 <Nav.Link as={Link} className={style.textNav} to="#">
-                  Payment
+                  Manage Movie
                 </Nav.Link>
                 <Nav.Link
                   as={Link}
                   className={style.textNav}
-                  to="/cinemars/profile"
+                  to="/cinemars/manage-movie/1"
                 >
-                  Profile
+                  Manage Premiere
                 </Nav.Link>
               </Nav>
               <NavDropdown

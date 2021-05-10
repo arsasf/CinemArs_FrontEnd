@@ -20,6 +20,7 @@ import Home from "./pages/main/Home/Home";
 import MovieDetail from "./pages/main/MovieDetail/MovieDetail";
 import Order from "./pages/main/Order/Order";
 import Payment from "./pages/main/Payment/Payment";
+import Profile from "./pages/main/Profile/Profile";
 import ManageMovie from "./pages/main/Admin/ManageMovie/ManageMovie";
 // ========================End=============================
 
@@ -67,17 +68,18 @@ class App extends Component {
               exact
               component={Signin}
             />
-            <Route path="/signup" exact component={Signup} />
+            <PublicRoute path="/signup" exact component={Signup} />
             <PrivateRoute path="/cinemars/home" exact component={Home} />
             <Route
               path="/cinemars/movie-detail/:id"
               exact
               component={MovieDetail}
             />
-            <Route path="/cinemars/Order" exact component={Order} />
-            <Route path="/cinemars/payment" exact component={Payment} />
-            <Route
-              path="/cinemars/manage-movie"
+            <PrivateRoute path="/cinemars/Order" exact component={Order} />
+            <PrivateRoute path="/cinemars/payment" exact component={Payment} />
+            <PrivateRoute path="/cinemars/profile" exact component={Profile} />
+            <PrivateRoute
+              path="/cinemars/manage-movie/:id"
               exact
               component={ManageMovie}
             />

@@ -45,6 +45,9 @@ class Signin extends Component {
     this.props.login(this.state.form).then((result) => {
       console.log(this.props.auth.data.token);
       localStorage.setItem("token", this.props.auth.data.token);
+      localStorage.setItem("user_id", this.props.auth.data.user_id);
+      localStorage.setItem("user_email", this.props.auth.data.user_email);
+      localStorage.setItem("user_role", this.props.auth.data.user_role);
       this.props.history.push("/cinemars/home");
     });
   };
