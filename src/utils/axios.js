@@ -33,6 +33,7 @@ axiosApiIntances.interceptors.response.use(
       alert("please login");
       localStorage.clear();
       window.location.href = "/signin";
+      console.log(error);
     }
     return Promise.reject(error);
   }

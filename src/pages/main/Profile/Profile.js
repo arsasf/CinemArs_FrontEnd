@@ -157,13 +157,6 @@ class Profile extends Component {
       });
   };
 
-  // handlePageClick = (event) => {
-  //   const selectedPage = event.selected + 1;
-  //   this.setState({ page: selectedPage }, () => {
-  //     this.getData();
-  //   });
-  // };
-
   render() {
     // console.log(this.props);
     const { data } = this.props.userProfile;
