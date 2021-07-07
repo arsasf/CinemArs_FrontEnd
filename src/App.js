@@ -43,6 +43,7 @@ class App extends Component {
               exact
               component={Login}
             />
+            <PublicRoute restricted={true} path="/" exact component={Login} />
             <PublicRoute
               path="/learning/basic-react"
               exact

@@ -59,12 +59,12 @@ class Signin extends Component {
         <section className={styles.pageSignIn}>
           <Container fluid className={styles.container}>
             <Row>
-              <Col lg={8} className={styles.columnLeft}>
+              <Col lg={7} className={styles.columnLeft}>
                 <Image src={background} className={styles.background} />
                 <Image src={tickitz} className={styles.tickitz} />
                 <p className={styles.titleWait}>Wait, watch, wow!</p>
               </Col>
-              <Col lg={4} className={styles.columnRight}>
+              <Col lg={5} className={styles.columnRight}>
                 <Image src={tickitz2} className={styles.logoResponsive} />
                 <Container className={styles.right}>
                   <Form className={styles.form} onSubmit={this.handleLogin}>

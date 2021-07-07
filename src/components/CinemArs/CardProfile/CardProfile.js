@@ -5,12 +5,8 @@ import styles from "./CardProfile.module.css";
 
 class CardProfile extends Component {
   render() {
-    const {
-      user_first_name,
-      user_last_name,
-      user_role,
-      user_image,
-    } = this.props.data;
+    const { user_first_name, user_last_name, user_role, user_image } =
+      this.props.data;
     const { handleUpdate, data } = this.props;
     console.log("ini props");
     console.log(this.props);
