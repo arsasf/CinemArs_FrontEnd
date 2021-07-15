@@ -1,0 +1,243 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+.fullArea {
+  background-color: #eaebee;
+  font-family: "Mulish", sans-serif;
+}
+
+.contentArea {
+  background-color: transparent;
+}
+
+.contentArea h1 {
+  font-size: 24px;
+  font-weight: 700;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.content1 {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1em;
+}
+.boxManagePremiere {
+  border-radius: 10px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  display: flex;
+  justify-content: space-around;
+}
+
+.columnImageMovie {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxImagePremiere {
+  width: max-content;
+  height: max-content;
+  background-color: white;
+  border-radius: 10px;
+  padding: 1em;
+}
+.imagePremiere {
+  width: 150px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.formLeft {
+  padding: 0;
+  padding: 1em;
+}
+
+.textLabel {
+  font-size: 16px;
+  font-weight: 400;
+  color: #4e4b66;
+}
+
+.selectMovie {
+  width: 100%;
+}
+
+.dropdownSelectMovie {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  height: 45px;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #4e4b66;
+  border: 2px solid #dedede;
+}
+
+.dropdownSelectMovie:hover,
+.dropdownSelectMovie:active,
+.dropdownSelectMovie:focus,
+.placeholder:hover,
+.placeholder:active,
+.placeholder:focus {
+  border: 2px solid #5f2eea;
+  background-color: transparent;
+  font-size: 14px;
+  color: #4e4b66;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.menuListMovie {
+  width: 100%;
+  padding: 1em;
+}
+
+.listMovie {
+  font-size: 14px;
+  color: #4e4b66;
+  font-weight: 500;
+}
+
+.listMovie:hover {
+  background-color: #5f2eea;
+  color: white;
+  border-radius: 3px;
+}
+
+.rowNamePricePremiere {
+  padding: 0;
+  justify-content: space-between;
+}
+
+.placeholder {
+  background-color: transparent;
+  height: 45px;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #4e4b66;
+  border: 2px solid #dedede;
+}
+
+.formPrice {
+  width: 50%;
+}
+
+.boxLogoPremiere {
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.buttonPremiereImage {
+  width: 30%;
+  height: 45px;
+}
+
+.buttonTime {
+  width: 30%;
+  height: 45px;
+  border: 2px solid #5f2eea;
+  color: #5f2eea;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonPremiereImage:hover,
+.buttonPremiereImage:active,
+.buttonPremiereImage:focus {
+  box-shadow: none !important;
+  outline: none !important;
+  border: 2px solid #5f2eea;
+}
+
+.logoPremiere {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.formRight {
+  padding: 1em;
+}
+
+.formDate {
+  width: 48.5%;
+}
+.boxButtonResetSubmit {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 2em;
+}
+
+.buttonReset {
+  width: 10em;
+  height: 45px;
+  background-color: white;
+  border: 2px solid #5f2eea;
+  color: #5f2eea;
+}
+
+.buttonSubmit {
+  height: 45px;
+  margin-left: 1em;
+  width: 10em;
+  color: white;
+  background-color: #5f2eea;
+}
+
+.buttonReset:hover,
+.buttonReset:active,
+.buttonReset:focus,
+.buttonSubmit:hover,
+.buttonSubmit:active,
+.buttonSubmit:focus {
+  background-color: black;
+  border: 2px solid black;
+  color: white;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.buttonTime:hover,
+.buttonTime:active,
+.buttonTime:focus {
+  box-shadow: none !important;
+  outline: none !important;
+  background-color: #5f2eea;
+  color: white;
+}
+
+@media (max-width: 991.98px) {
+  .boxManagePremiere {
+    flex-direction: column;
+  }
+
+  .formPrice {
+    width: 100%;
+  }
+
+  .boxButtonResetSubmit {
+    flex-direction: column;
+    padding: 1em;
+  }
+
+  .buttonSubmit {
+    margin-left: 0;
+    margin-top: 1em;
+  }
+
+  .formDate {
+    width: 100%;
+  }
+
+  .buttonSubmit,
+  .buttonReset {
+    width: 100%;
+  }
+}

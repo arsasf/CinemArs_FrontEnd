@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import axiosApiIntances from "../../../utils/axios";
-import { getAllMovie } from "../../../redux/actions/manageMovie";
+import { getAllMovie } from "../../../redux/actions/movie";
 import { connect } from "react-redux";
 import styles from "./Home.module.css";
 import NavBar from "../../../components/CinemArs/Navbar/Navbar";
@@ -23,134 +22,114 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: {
-        movieId: "",
-        movieName: "",
-        movieCategory: "",
-        image: null,
-        movieReleaseDate: "",
-      },
-      data: [],
-      dataNowMonth: [],
-      dataMonth: [],
-      dataUpcoming: [],
-      pagination: {},
-      paginationUpcoming: {},
+      dataAllMovie: [],
+      dataMovieMonthNow: [],
+      id: "",
       page: 1,
       limit: 5,
-      limitShowing: 5,
-      sort: "movie_id ASC",
       searchByName: "",
-      month: "month(now())",
-      monthUpcoming: "month(now())",
-      isClick: false,
-      id: "",
+      sort: "movie_id ASC",
+      month: "MONTH(movie_release_date)",
+      viewAll: false,
+      totalDataMovieMonth: 0,
+      totalDataMovie: 0,
     };
   }
-
   componentDidMount() {
-    this.handleMovieUpcomingClick();
-    this.getData();
-    this.getDataNowMonth();
+    this.getDataMovie();
+    this.getDataMovieMonthNow();
   }
 
-  getData = () => {
-    console.log("Get Data !");
-    const { page, limit, sort, searchByName, monthUpcoming } = this.state;
-    axiosApiIntances
-      .get(
-        `movie?page=${page}&limit=${limit}&sort= ${sort}&searchByName=${searchByName}&month=${monthUpcoming}`
-      )
+  getDataMovie = () => {
+    const { page, limit, searchByName, sort, month } = this.state;
+    this.props
+      .getAllMovie(page, limit, searchByName, sort, month)
       .then((res) => {
         this.setState({
-          data: res.data.data,
-          paginationUpcoming: res.data.pagination,
+          ...this.state,
+          dataAllMovie: res.value.data.data,
+          totalDataMovie: res.value.data.pagination.totalData,
         });
       })
       .catch((err) => {
-        console.log(err.response);
+        if (err) {
+          return [];
+        }
       });
   };
 
-  handleImage = (event) => {
-    this.setState({
-      form: {
-        ...this.state.form,
-        image: event.target.files[0],
-      },
-    });
+  getDataMovieMonthNow = () => {
+    const month = "MONTH(now())";
+    const { page, limit, searchByName, sort } = this.state;
+    this.props
+      .getAllMovie(page, limit, searchByName, sort, month)
+      .then((res) => {
+        this.setState({
+          ...this.state,
+          dataMovieMonthNow: res.value.data.data,
+          totalDataMovieMonth: res.value.data.pagination.totalData,
+        });
+      })
+      .catch((err) => {
+        if (err) {
+          return [];
+        }
+      });
   };
 
-  getDataNowMonth = () => {
-    console.log("Get Data nowMonth !");
-    console.log(this.props);
-    const { page, limit, searchByName, sort, month } = this.state;
-    this.props.getAllMovie(page, limit, searchByName, sort, month);
-
-    // axiosApiIntances
-    //   .get(
-    //     `movie?page=${page}&limit=${limit}&sort= ${sort}&searchByName=${searchByName}&month=${month}`
-    //   )
-    //   .then((res) => {
-    //     this.setState({
-    //       dataNowMonth: res.data.data,
-    //       pagination: res.data.pagination,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.response);
-    //   });
-  };
-
-  handleMovieShowingClick = () => {
-    this.setState(
-      {
-        ...this.state.from,
-        limit: 5,
-        month: "month(now())",
-      },
-      () => {
-        this.getDataNowMonth();
-      }
-    );
-  };
-
-  handleMovieShowingAllClick = (event, totalDataShowing) => {
+  handleViewLess = (event) => {
     event.preventDefault();
     this.setState(
       {
         ...this.state.from,
-        limit: totalDataShowing,
+        viewAll: false,
+        limit: 5,
         month: "month(now())",
       },
       () => {
-        this.getDataNowMonth();
+        this.getDataMovieMonthNow();
       }
     );
   };
-
-  handleMovieUpcomingClick = () => {
+  handleMovieShowingAllClick = (event, totalData) => {
+    event.preventDefault();
     this.setState(
       {
-        ...this.state.from,
-        monthUpcoming: 5,
-        limit: 5,
+        ...this.state,
+        viewAll: true,
+        limit: totalData,
+        month: "month(now())",
       },
       () => {
-        this.getData();
+        this.getDataMovieMonthNow();
       }
     );
   };
-
-  handleMovieUpcomingAllClick = (event, totalDataUpcoming) => {
+  handleViewUpcomingLess = (event) => {
     event.preventDefault();
     this.setState(
       {
         ...this.state.from,
-        limit: totalDataUpcoming,
+        viewAll: false,
+        limit: 5,
+        month: "MONTH(movie_release_date)",
       },
       () => {
-        this.getData();
+        this.getDataMovie();
+      }
+    );
+  };
+  handleMovieUpcomingAllClick = (event, totalData) => {
+    event.preventDefault();
+    this.setState(
+      {
+        ...this.state,
+        viewAll: true,
+        limit: totalData,
+        month: "MONTH(movie_release_date)",
+      },
+      () => {
+        this.getDataMovie();
       }
     );
   };
@@ -158,22 +137,24 @@ class Home extends Component {
   handleMovieUpcomingMonthClick = (params) => {
     this.setState(
       {
-        ...this.state.from,
-        monthUpcoming: params,
+        ...this.state,
         limit: 5,
-        data: [],
+        month: params,
       },
       () => {
-        this.getData();
+        this.getDataMovie();
       }
     );
   };
 
   render() {
-    console.log(this.props.manageMovie.data);
-    // console.log(this.state.monthUpcoming);
-    const totalDataShowing = this.props.manageMovie.pagination.totalData;
-    const totalDataUpcoming = this.state.paginationUpcoming.totalData;
+    const {
+      dataAllMovie,
+      dataMovieMonthNow,
+      viewAll,
+      totalDataMovie,
+      totalDataMovieMonth,
+    } = this.state;
 
     return (
       <>
@@ -213,33 +194,48 @@ class Home extends Component {
               <Container className={styles.containerForm}>
                 <Row className={styles.showingText}>
                   <Row className={styles.bar}>
-                    <Link
-                      to="#"
-                      className={styles.titleShowingText}
-                      onClick={() => this.handleMovieShowingClick()}
-                    >
+                    <Link to="#" className={styles.titleShowingText}>
                       Now Showing
                     </Link>
                     <span className={styles.activeBar}></span>
                   </Row>
                   <Link
                     to="#"
-                    onClick={(event) =>
-                      this.handleMovieShowingAllClick(event, totalDataShowing)
+                    onClick={
+                      viewAll === false
+                        ? (event) =>
+                            this.handleMovieShowingAllClick(
+                              event,
+                              totalDataMovieMonth
+                            )
+                        : (event) => this.handleViewLess(event)
                     }
                     className={styles.viewAllShowing}
                   >
-                    View All
+                    {viewAll === true ? "View Less" : "View All"}
                   </Link>
                 </Row>
-                <Row className={styles.rowCardImage}>
-                  {this.props.manageMovie.data.map((item, index) => {
-                    return (
-                      <Col md={2} key={index} className={styles.colCardImage}>
-                        <CardImage data={item} />
-                      </Col>
-                    );
-                  })}
+                <Row
+                  className={
+                    dataMovieMonthNow.length > 4 &&
+                    dataMovieMonthNow.length <= 5
+                      ? styles.rowCardImage
+                      : styles.rowCardImageLimit
+                  }
+                >
+                  {dataMovieMonthNow.length > 0 ? (
+                    dataMovieMonthNow.map((item, index) => {
+                      return (
+                        <Col md={2} key={index} className={styles.colCardImage}>
+                          <CardImage data={item} />
+                        </Col>
+                      );
+                    })
+                  ) : (
+                    <div className={styles.notFound}>
+                      Sorry, <br /> there are no movies released this month...
+                    </div>
+                  )}
                 </Row>
               </Container>
             </Container>
@@ -247,21 +243,23 @@ class Home extends Component {
             <Container fluid className={styles.containerContent3}>
               <Container className={styles.containerForm}>
                 <Row className={styles.showingText} sticky="top">
-                  <Link
-                    className={styles.titleUpcomingText}
-                    to="#"
-                    onClick={() => this.handleMovieUpcomingClick()}
-                  >
+                  <Link className={styles.titleUpcomingText} to="#">
                     Upcoming Movies
                   </Link>
                   <Link
                     to="#"
-                    onClick={(event) =>
-                      this.handleMovieUpcomingAllClick(event, totalDataUpcoming)
+                    onClick={
+                      viewAll === false
+                        ? (event) =>
+                            this.handleMovieUpcomingAllClick(
+                              event,
+                              totalDataMovie
+                            )
+                        : (event) => this.handleViewUpcomingLess(event)
                     }
                     className={styles.viewAll}
                   >
-                    View All
+                    {viewAll === false ? "View All" : "View Less"}
                   </Link>
                 </Row>
                 <Row className={styles.month}>
@@ -271,6 +269,38 @@ class Home extends Component {
                     defaultValue={1}
                     className={styles.overflow}
                   >
+                    <ToggleButton
+                      className={styles.Button}
+                      variant="dark"
+                      value="1"
+                      onClick={() => this.handleMovieUpcomingMonthClick(1)}
+                    >
+                      Januari
+                    </ToggleButton>
+                    <ToggleButton
+                      className={styles.Button}
+                      variant="dark"
+                      value="2"
+                      onClick={() => this.handleMovieUpcomingMonthClick(2)}
+                    >
+                      Februari
+                    </ToggleButton>
+                    <ToggleButton
+                      className={styles.Button}
+                      variant="dark"
+                      value="3"
+                      onClick={() => this.handleMovieUpcomingMonthClick(3)}
+                    >
+                      Maret
+                    </ToggleButton>
+                    <ToggleButton
+                      className={styles.Button}
+                      variant="dark"
+                      value="4"
+                      onClick={() => this.handleMovieUpcomingMonthClick(4)}
+                    >
+                      April
+                    </ToggleButton>
                     <ToggleButton
                       className={styles.Button}
                       value="5"
@@ -335,48 +365,28 @@ class Home extends Component {
                     >
                       Desember
                     </ToggleButton>
-                    <ToggleButton
-                      className={styles.Button}
-                      variant="dark"
-                      value="1"
-                      onClick={() => this.handleMovieUpcomingMonthClick(1)}
-                    >
-                      Januari
-                    </ToggleButton>
-                    <ToggleButton
-                      className={styles.Button}
-                      variant="dark"
-                      value="2"
-                      onClick={() => this.handleMovieUpcomingMonthClick(2)}
-                    >
-                      Februari
-                    </ToggleButton>
-                    <ToggleButton
-                      className={styles.Button}
-                      variant="dark"
-                      value="3"
-                      onClick={() => this.handleMovieUpcomingMonthClick(3)}
-                    >
-                      Maret
-                    </ToggleButton>
-                    <ToggleButton
-                      className={styles.Button}
-                      variant="dark"
-                      value="4"
-                      onClick={() => this.handleMovieUpcomingMonthClick(4)}
-                    >
-                      April
-                    </ToggleButton>
                   </ToggleButtonGroup>
                 </Row>
-                <Row className={styles.rowCard}>
-                  {this.state.data.map((item, index) => {
-                    return (
-                      <Col md={2} key={index} className={styles.colCard}>
-                        <Cards data={item} />
-                      </Col>
-                    );
-                  })}
+                <Row
+                  className={
+                    dataAllMovie.length > 4 && dataAllMovie.length <= 5
+                      ? styles.rowCard
+                      : styles.rowCardLimit
+                  }
+                >
+                  {dataAllMovie.length > 0 ? (
+                    dataAllMovie.map((item, index) => {
+                      return (
+                        <Col md={2} key={index} className={styles.colCard}>
+                          <Cards data={item} />
+                        </Col>
+                      );
+                    })
+                  ) : (
+                    <div className={styles.notFound}>
+                      Sorry, <br /> there are no movies released this month...
+                    </div>
+                  )}
                 </Row>
               </Container>
             </Container>
@@ -425,7 +435,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  manageMovie: state.manageMovie,
+  movie: state.movie,
   auth: state.auth,
 });
 

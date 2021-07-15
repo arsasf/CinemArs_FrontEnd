@@ -34,3 +34,11 @@ span {
 .seatSold {
   background-color: #6e7191;
 }
+
+@media (max-width: 991.98px) {
+  .seat {
+    width: 15.5px;
+    height: 15.5px;
+    border-radius: 25%;
+  }
+}

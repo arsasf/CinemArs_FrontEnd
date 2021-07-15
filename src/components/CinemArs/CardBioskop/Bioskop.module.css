@@ -6,11 +6,12 @@
 }
 
 .card {
+  padding: 10px;
   margin-top: 10px;
   margin-bottom: 30px;
   justify-content: space-around;
-  height: 320px;
-  width: 320px;
+  height: 400px;
+  width: 350px;
   border-radius: 8px;
   border-color: #ebebeb;
   border-style: solid;
@@ -24,7 +25,9 @@
 }
 
 .logoBioskop {
-  height: max-content;
+  width: 8em;
+  height: 2em;
+  object-fit: contain;
   margin-left: 20px;
   margin-bottom: auto;
   margin-top: auto;
@@ -67,12 +70,16 @@
   border: white !important;
 }
 
-.time1:hover {
+.time1:hover,
+.time1:active,
+.time1:focus {
   background-color: rgba(0, 0, 0, 0.829) !important;
   color: #f7f7fc !important;
   border-color: rgba(0, 0, 0, 0.829) !important;
   font-weight: lighter;
   border-color: white !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 .price {
@@ -81,7 +88,7 @@
 }
 
 .price h1 {
-  width: 35%;
+  /* width: ; */
   padding: 10px;
   margin: 5px;
   color: #000000;
@@ -90,7 +97,7 @@
 }
 
 .price h6 {
-  width: 25%;
+  /* width: 25%; */
   padding: 10px;
   margin: 5px;
   color: #6e7191;
@@ -103,21 +110,22 @@
 }
 
 .booking .btn1 {
-  width: 90%;
+  width: 95%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #5f2eea !important;
+  background-color: #5f2eea;
   font-size: 16px;
   font-weight: lighter, 700;
-  color: #f7f7fc !important;
-  outline: #5f2eea !important;
-  border-color: #5f2eea !important;
+  color: #f7f7fc;
+  outline: #5f2eea;
+  border-color: #5f2eea;
 }
 
-.booking button.btn1:hover {
-  background-color: #f7f7fc;
-  color: #5f2eea;
-  font-weight: bold;
+.btn1:hover,
+.btn1:focus,
+.btn1:active {
+  background-color: black;
+  border: 0;
 }
 
 .content21 {
@@ -159,7 +167,7 @@
   }
 
   .logoBioskop {
-    /* height: 25%; */
+    height: 25%;
     width: 40%;
     margin-left: 5px;
     margin-right: 7px;
@@ -184,6 +192,10 @@
     font-size: 11px;
     font-weight: lighter;
     color: #6e7191;
+    width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .card span {
@@ -203,6 +215,9 @@
     color: rgb(70, 67, 67) !important;
     font-size: 9px;
     font-weight: lighter;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .price {
@@ -211,7 +226,6 @@
   }
 
   .price h1 {
-    width: 40%;
     padding: 10px;
     margin: 5px;
     color: #000000;
@@ -220,7 +234,6 @@
   }
 
   .price h6 {
-    width: 25%;
     padding: 10px;
     margin: 5px;
     color: #6e7191;
@@ -233,11 +246,10 @@
   }
 
   .booking .btn1 {
-    width: 90%;
     margin-left: auto;
     margin-right: auto;
     background-color: #5f2eea !important;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: lighter, 700;
     color: white !important;
     outline: white !important;

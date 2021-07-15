@@ -23,6 +23,7 @@ class Home extends Component {
       isLoading: false,
       isUpdate: false,
       id: "",
+      totalData: 0,
     };
   }
 

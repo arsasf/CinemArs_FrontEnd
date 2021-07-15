@@ -49,10 +49,16 @@
 }
 
 .content2 {
-  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.boxPayment {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: white;
   height: 368px;
   border-radius: 6px;
 }
@@ -93,6 +99,14 @@
 .content3 {
   margin-top: 40px;
   margin-bottom: 72px;
+}
+
+.button:hover,
+.button:active,
+.button:focus {
+  border: 2px solid #5f2eea;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 .checkout .btnChange1,

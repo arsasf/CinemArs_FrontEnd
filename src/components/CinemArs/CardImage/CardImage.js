@@ -8,7 +8,6 @@ class CardImage extends Component {
     this.props.history.push(`/learning/basic-movie-detail/${id}`);
   };
   render() {
-    console.log(this.props);
     const { movie_img } = this.props.dataNowMonth;
     return (
       <>

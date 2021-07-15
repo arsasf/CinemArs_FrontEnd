@@ -9,28 +9,25 @@
 }
 .sectionAsideCombine {
   margin-top: 90px;
-  background-color: cadetblue;
 }
 /*? Kolom kiri=================**/
 .colLeft {
   padding-top: 10px;
-  background-color: aqua;
+  padding-bottom: 3em;
 }
 
 /* *===================================isi left Content1 Golbal=================== */
 .titleContentLeft1 {
-  background-color: chartreuse;
   font-size: 24px;
   font-weight: 600;
   color: black;
 }
 .contentLeft1 {
-  /* background-color: #e5e5e5; */
+  background-color: #e5e5e5;
   height: 100px;
   display: flex;
   justify-content: left;
   align-items: center;
-  background-color: brown;
   margin-bottom: 1px;
 }
 /**==================================Akhir left Content1 Global ======================== */
@@ -40,14 +37,14 @@
   display: flex;
   align-items: flex-end;
   height: 75px;
-  background-color: teal;
 }
 
 /*============Content2*/
 .rowContent2Left1 {
+  padding: 0;
+  background-color: white;
   border-radius: 10px;
-  height: 50px;
-  background-color: teal;
+  height: 100px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -65,7 +62,6 @@
   display: flex;
   align-items: flex-end;
   height: 75px;
-  background-color: teal;
 }
 /* !Akhir left konten per baris==================================*/
 
@@ -73,20 +69,27 @@
 .contentLeft2 {
   display: flex;
   flex-direction: column;
-  justify-content: baseline;
+  justify-content: center;
   align-items: center;
-  background-color: brown;
   margin-bottom: 1px;
-  height: 500px;
+  height: max-content;
   padding-top: 12.5px;
   padding-bottom: 12.5px;
+}
+
+.boxContentLeft2 {
+  background-color: white;
+  border-radius: 15px;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  padding-left: 7em;
+  padding-right: 5em;
 }
 .titleContent1Left2 {
   text-align: center;
   font-size: 14px;
   color: #4e4b66;
   font-weight: 600;
-  background-color: chartreuse;
 }
 .rowContent1Left2 {
   display: flex;
@@ -96,7 +99,6 @@
   width: 100%;
   margin-top: 2px;
   height: 100px;
-  background-color: teal;
 }
 .rowContent2Left2 {
   display: flex;
@@ -107,7 +109,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: teal;
 }
 .titleContent2Left2 {
   display: flex;
@@ -120,27 +121,25 @@
   font-size: 14px;
   color: #4e4b66;
   font-weight: 600;
-  background-color: chartreuse;
 }
 .setAngkaSeat {
-  width: 95%;
-  background-color: chartreuse;
+  width: 69% !important;
   font-size: 14px;
   color: #4e4b66;
   font-weight: 600;
-  margin-left: 0.5px;
-  margin-right: 0.5px;
+  margin-left: 14.5%;
+  background-color: yellowgreen;
 }
 .seat {
-  background-color: #5f2eea;
-  width: 15px !important;
-  margin: 0;
-  margin-right: 1px;
-  margin-left: 1px;
+  padding: 0px;
+  width: 10px !important;
+  margin-right: 2px;
+  margin-left: 2px;
+  text-align: center;
 }
 /* ========================== */
 .content2 {
-  background-color: #e5e5e5;
+  /* background-color: #e5e5e5; */
   background-color: white;
 }
 
@@ -178,10 +177,6 @@
   color: black;
   height: 20px;
   font-weight: 600;
-}
-
-.checkout {
-  background-color: white;
 }
 
 .key {
@@ -242,17 +237,17 @@
 /* ==========Content3======= */
 .content3 {
   margin-top: 5%;
-  background-color: white;
+  margin-bottom: 2em;
 }
 
 .checkout {
   justify-content: space-between;
   border-radius: 6px;
   margin: auto;
+  border-radius: 15px;
 }
 
-Button.btnCheckout:hover {
-  background-color: #5f2eea;
+.btnCheckout:hover {
   color: #5f2eea;
   font-size: 16px;
   border-color: #d8cdf8;
@@ -261,8 +256,7 @@ Button.btnCheckout:hover {
   border-radius: 4px;
 }
 
-.btnChange1,
-Button.btnCheckout:hover {
+.btnChange1 {
   background-color: #e5e5e5;
   color: #5f2eea;
   font-size: 16px;
@@ -270,6 +264,12 @@ Button.btnCheckout:hover {
   height: 56px;
   width: 300px;
   border-radius: 4px;
+}
+
+.buttonChange:hover,
+.buttonChange:active,
+.buttonChange:focus {
+  color: #5f2eea;
 }
 
 .btnCheckout {
@@ -289,14 +289,13 @@ Button.btnCheckout:hover {
 } */
 /* *akhir content3=========== */
 /* *Content4============ */
+
 .content4 {
   font-family: "Mulish", sans-serif;
-  background-color: blueviolet;
 }
 
 .cont41 {
   margin-top: 43px;
-  background-color: black;
 }
 
 .infoOrder {
@@ -308,23 +307,38 @@ Button.btnCheckout:hover {
 
 .payment {
   background-color: #ffffff;
-  margin: 2px -20px 0px -20px;
   height: 413px;
   border-radius: 6px;
   align-items: center;
+  margin-bottom: 2em;
+  justify-content: center;
 }
 
-.nametheater {
+.nameTheater {
+  object-fit: contain;
+  width: auto;
+  height: auto;
+}
+.boxTheater {
+  display: flex;
   flex-direction: column;
-  justify-content: start;
   align-items: center;
+  height: max-content;
+  padding: 1em;
 }
-
-.nameTheater Image {
-  width: max-content;
-  padding: 20px;
+.nameMovie,
+.dateMovie,
+.priceTicket,
+.seatChoosed,
+.totalPayment {
+  width: 100%;
+  justify-content: space-between;
 }
-
+.textTheater {
+  margin-top: 1em;
+  font-size: 24px;
+  font-weight: bold;
+}
 .nameTheater h1 {
   font-size: 24px;
   font-weight: 600;
@@ -364,29 +378,137 @@ Button.btnCheckout:hover {
   padding-right: 25px;
 }
 /* Akhir Content3===================== */
+.line {
+  height: 0.2em;
+  width: 100%;
+  background-color: #5f2eea;
+}
+
+.boxSeatingKey {
+  margin-top: 1em;
+  width: 100%;
+}
+.rowBoxSeat {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+}
+
+.boxSeat {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.boxSeat h6 {
+  margin-bottom: 0;
+}
+.seatAvailable {
+  width: 25px;
+  height: 25px;
+  border-radius: 25%;
+  background-color: #d6d8e7;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.seatSelected {
+  width: 25px;
+  height: 25px;
+  border-radius: 25%;
+  background-color: #5f2eea;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.seatSold {
+  width: 25px;
+  height: 25px;
+  border-radius: 25%;
+  background-color: #6e7191;
+  margin-right: 10px;
+  margin-left: 10px;
+}
 
 /* Responsive =========== */
 @media (max-width: 575.98px) {
-  .order-page .content2 table {
+  .orderPage .content2 table {
     display: none;
   }
-  .order-page .content4 .payment {
-    margin: 2px 0px 20px 0px;
-    height: 413px;
-    border-radius: 6px;
+
+  .seatAvailable,
+  .seatSelected,
+  .seatSold {
+    width: 15px;
+    height: 15px;
+  }
+
+  .rowBoxSeat h6 {
+    font-size: 12px;
+  }
+
+  .boxSeatingKey h5 {
+    font-size: 15px;
+    width: 100%;
+    text-align: left;
+  }
+  .boxContentLeft2 {
+    padding: 1em 3% 1em 10%;
+  }
+
+  .checkout {
+    padding: 1em;
+  }
+
+  .btnChange1 {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .btnCheckout {
+    width: 100%;
+  }
+
+  .btnChange1:hover,
+  .btnChange1:focus,
+  .btnChange1:active,
+  .btnCheckout:hover,
+  .btnCheckout:focus,
+  .btnCheckout:active {
+    background-color: #4312c9 !important;
+    width: 100% !important;
+  }
+  .boxTheater {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: max-content;
+    padding: 1em;
+  }
+  .nameTheater {
+    object-fit: contain;
+    width: auto;
+    height: auto;
+  }
+
+  .textTheater {
+    margin-top: 1em;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .payment {
+    padding: 2em;
+    justify-content: center;
     align-items: center;
   }
 
-  .order-page .content4 .info-order {
-    margin: 20px;
-  }
-  .order-page .content3 .checkout {
-    margin-bottom: 20px;
-    justify-content: center;
-  }
-  .order-page .content3 .checkout .btn-change1,
-  .order-page .content3 .checkout .btn-checkout {
-    margin: 20px;
+  .nameMovie,
+  .dateMovie,
+  .priceTicket,
+  .seatChoosed,
+  .totalPayment {
+    width: 100%;
+    justify-content: space-between;
   }
 }
 /* Akhir order page=================== */

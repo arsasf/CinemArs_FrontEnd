@@ -3,7 +3,7 @@
 /* ================Content1===================*/
 
 .containerCenter {
-  margin-top: 80px;
+  margin-top: 8em;
   font-family: "Mulish", sans-serif;
 }
 
@@ -18,8 +18,23 @@
   padding-top: -20px;
   justify-content: center !important;
   margin: auto;
+  width: 100%;
 }
+
+.notFound {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5f2eea;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+}
+
 .datePlace {
+  width: 100%;
   margin-top: 20px;
 }
 
@@ -28,14 +43,25 @@
   font-size: 24px;
   font-weight: 700;
 }
+
+.boxShowTimeTicket {
+  margin-top: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
 .rowDateficker {
   margin-bottom: 20px;
-  width: 550px;
+  width: 100%;
 }
 
-.rowDateficker input {
-  width: 245px;
-  background-color: #eaebee !important;
+.placeholder {
+  background-color: transparent;
+  height: 45px;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #4e4b66;
+  border: 2px solid #dedede;
 }
 .row {
   justify-content: space-between;
@@ -100,6 +126,58 @@
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
   border-radius: unset;
+}
+
+.form {
+  width: 25%;
+  margin-left: 20px;
+}
+.formLeft {
+  width: 25%;
+}
+
+.dropdownSelectMovie {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  height: 45px;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #4e4b66;
+  border: 2px solid #dedede;
+}
+
+.dropdownSelectMovie:hover,
+.dropdownSelectMovie:active,
+.dropdownSelectMovie:focus,
+.placeholder:hover,
+.placeholder:active,
+.placeholder:focus {
+  border: 2px solid #5f2eea;
+  background-color: transparent;
+  font-size: 14px;
+  color: #4e4b66;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.menuListMovie {
+  width: 100%;
+  padding: 1em;
+}
+
+.listMovie {
+  font-size: 14px;
+  color: #4e4b66;
+  font-weight: 500;
+}
+
+.listMovie:hover {
+  background-color: #5f2eea;
+  color: white;
+  border-radius: 3px;
 }
 
 /**responsive */

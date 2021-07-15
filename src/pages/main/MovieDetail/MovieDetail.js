@@ -1,102 +1,69 @@
 import { Component } from "react";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Row, Form, Dropdown } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
 import NavBar from "../../../components/CinemArs/Navbar/Navbar";
 import Footer from "../../../components/CinemArs/Footer/Footer";
 import styles from "./MovieDetail.module.css";
-import axiosApiIntances from "../../../utils/axios";
 import CardMovie from "../../../components/CinemArs/CardMovie/CardMovie";
 import Bioskop from "../../../components/CinemArs/CardBioskop/Bioskop";
-// import Bioskop from "../../../components/CinemArs/CardBioskop/Bioskop";
-// import dateFormat from "dateformat";
+import { getMovieById } from "../../../redux/actions/movie";
+import { getAllPremiere } from "../../../redux/actions/premiere";
+import { connect } from "react-redux";
 
 class movieDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: {},
       data: [],
       dataPremiere: [],
-      pagination: "",
-      paginationPremiere: "",
+      totalPage: 0,
       page: 1,
       limit: 6,
-      limitShowing: 5,
       sort: "premiere.premiere_id ASC",
-      searchByName: "",
-      searchByDate: "",
-      month: "month(now())",
-      isLoading: false,
-      id: "",
+      searchByLocation: "",
+      searchByDate: "premiere.show_time_date",
+      showDate: "2021-07-15",
     };
   }
 
   componentDidMount() {
-    console.log("Get Data !");
-    const { id } = this.props.match.params;
-    console.log({ id });
-    // ==========untuk page movie detai ===========
-    // Proses get data movie by id
-    // Proses get data premiere by id
-    this.getDataMovieById(id);
-    this.getDataBioskopById(id);
+    this.getDataMovieById();
+    this.getDataBioskopById();
   }
 
   getDataMovieById = () => {
     const { id } = this.props.match.params;
-    this.setState({ isLoading: true });
-    axiosApiIntances
-      .get(`movie/${id}`)
+    this.props
+      .getMovieById(id)
       .then((res) => {
         this.setState({
-          data: res.data.data,
-          pagination: res.data.pagination,
+          ...this.state,
+          data: res.value.data.data,
         });
       })
       .catch((err) => {
-        console.log(err.response);
-      })
-      .finally(() => {
-        setTimeout(() => {
-          this.setState({ isLoading: false });
-        }, 1000);
+        if (err) {
+          return [];
+        }
       });
   };
 
   getDataBioskopById = () => {
-    console.log("Get Data Bioskop Movie");
     const { id } = this.props.match.params;
-    const { page, limit, sort, searchByName, searchByDate } = this.state;
-    this.setState({ isLoading: true });
-    axiosApiIntances
-      .get(
-        `premiere/${id}?page=${page}&limit=${limit}&sort=${sort}&searchByName=${searchByName}&searchByDate=${searchByDate}`
-      )
+    const { page, limit, sort, searchByLocation, searchByDate } = this.state;
+    this.props
+      .getAllPremiere(id, page, limit, sort, searchByLocation, searchByDate)
       .then((res) => {
         this.setState({
-          dataPremiere: res.data.data,
-          paginationPremiere: res.data.pagination,
+          ...this.state,
+          dataPremiere: res.value.data.data,
+          totalPage: res.value.data.pagination.totalpage,
         });
       })
       .catch((err) => {
-        console.log(err.response);
-      })
-      .finally(() => {
-        setTimeout(() => {
-          this.setState({ isLoading: false });
-        }, 1000);
+        return [];
       });
   };
-  // changeDate = (movie_release_date) => {
-  //   this.setState(
-  //     {
-  //       movie_release_date: dateFormat(movie_release_date, "mmmm dS, yyyy"),
-  //     },
-  //     () => {
-  //       this.getDataById();
-  //     }
-  //   );
-  // };
 
   handlePageClick = (event) => {
     const selectedPage = event.selected + 1;
@@ -104,24 +71,50 @@ class movieDetail extends Component {
       this.getDataBioskopById();
     });
   };
+
+  handleSearchByDate = (event) => {
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.value,
+    });
+    const { id } = this.props.match.params;
+    const searchByDate = `${event.target.value}`;
+    console.log(searchByDate, typeof searchByDate);
+    const { page, limit, sort, searchByLocation } = this.state;
+    this.props
+      .getAllPremiere(
+        id,
+        page,
+        limit,
+        sort,
+        searchByLocation,
+        event.target.value
+      )
+      .then((res) => {
+        this.setState({
+          ...this.state,
+          dataPremiere: res.value.data.data,
+          totalPage: res.value.data.pagination.totalpage,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          ...this.state,
+          dataPremiere: [],
+        });
+      });
+  };
   render() {
-    const { isLoading } = this.state.data;
-    const { totalpage } = this.state.paginationPremiere;
+    const { data, dataPremiere } = this.state;
     return (
       <>
         <NavBar />
         <Container fluid className={styles.containerCenter}>
           <Row className={styles.rowHome}>
             {/* <!-- =================Content1============--> */}
-            {isLoading ? (
-              <Col md={12}>
-                <Spinner animation="border" variant="primary" />
-              </Col>
-            ) : (
-              this.state.data.map((item, index) => {
-                return <CardMovie data={item} key={index} />;
-              })
-            )}
+            {data.map((item, index) => {
+              return <CardMovie data={item} key={index} />;
+            })}
             {/* <!-- akhir Content1======================= --> */}
             {/* <!-- ===============Content2============== --> */}
             <Container fluid className={styles.content2}>
@@ -130,68 +123,84 @@ class movieDetail extends Component {
                   <Row className={styles.dateficker}>
                     <div className={styles.datePlace}>
                       <h1>Showtimes and Tickets</h1>
-                      <div className="form-date-place">
-                        <Row
-                          className={`${styles.rowDateficker} g-2 align-items-center`}
-                        >
-                          <Col className="col-auto">
-                            <input
-                              type="date"
-                              name="begin"
-                              placeholder="dd-mm-yyyy"
-                              defaultValue=""
-                              min="1997-01-01"
-                              max="2030-12-31"
-                              className="form-control"
-                            />
-                          </Col>
-                          <Col className="col-auto">
-                            <input
-                              type="text"
-                              defaultValue=""
-                              className="form-control"
-                            />
-                          </Col>
-                        </Row>
+                      <div className={styles.boxShowTimeTicket}>
+                        <div className={styles.formLeft}>
+                          <Form.Control
+                            type="date"
+                            name="showDate"
+                            placeholder="dd-mm-yyyy"
+                            defaultValue={this.state.showDate}
+                            min="2021-01-01"
+                            max="2021-12-31"
+                            value={this.state.showDate}
+                            onChange={(e) => this.handleSearchByDate(e)}
+                            className={styles.placeholder}
+                          />
+                        </div>
+                        <Form.Group className={styles.form}>
+                          <Dropdown className={styles.selectMovie}>
+                            <Dropdown.Toggle
+                              variant="fff"
+                              className={styles.dropdownSelectMovie}
+                            >
+                              Location
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu className={styles.menuListMovie}>
+                              <Dropdown.Item className={styles.listMovie}>
+                                Banjarmasin
+                              </Dropdown.Item>
+                              <Dropdown.Item className={styles.listMovie}>
+                                Banjarbaru
+                              </Dropdown.Item>
+                              <Dropdown.Item className={styles.listMovie}>
+                                Barito Kuala
+                              </Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </Form.Group>
                       </div>
                     </div>
                   </Row>
-                  <Row>
-                    <Container fluid className={styles.containerFluid}>
-                      <Container>
-                        <Row className={styles.row2}>
-                          {isLoading ? (
-                            <Col md={12}>
-                              <Spinner animation="border" variant="primary" />
-                            </Col>
-                          ) : (
-                            this.state.dataPremiere.map((item, index) => {
+                  {dataPremiere.length > 0 ? (
+                    <Row>
+                      <Container fluid className={styles.containerFluid}>
+                        <Container>
+                          <Row className={styles.row2}>
+                            {dataPremiere.map((item, index) => {
                               return (
-                                <Bioskop dataPremiere={item} key={index} />
+                                <Bioskop
+                                  dataPremiere={item}
+                                  data={data[0]}
+                                  key={index}
+                                />
                               );
-                            })
-                          )}
-                          <Container
-                            className={`${styles.content21}  d-flex justify-content-between`}
-                          >
-                            <ReactPaginate
-                              previousLabel={"prev"}
-                              nextLabel={"next"}
-                              breakLabel={"..."}
-                              breakClassName={"break-me"}
-                              pageCount={totalpage}
-                              marginPagesDisplayed={2}
-                              pageRangeDisplayed={5}
-                              onPageChange={this.handlePageClick}
-                              containerClassName={styles.pagination}
-                              subContainerClassName={`${styles.pages} ${styles.pagination}`}
-                              activeClassName={styles.active}
-                            />
-                          </Container>
-                        </Row>
+                            })}
+                            <Container
+                              className={`${styles.content21}  d-flex justify-content-between`}
+                            >
+                              <ReactPaginate
+                                previousLabel={"prev"}
+                                nextLabel={"next"}
+                                breakLabel={"..."}
+                                breakClassName={"break-me"}
+                                pageCount={this.state.totalPage}
+                                marginPagesDisplayed={2}
+                                pageRangeDisplayed={5}
+                                onPageChange={this.handlePageClick}
+                                containerClassName={styles.pagination}
+                                subContainerClassName={`${styles.pages} ${styles.pagination}`}
+                                activeClassName={styles.active}
+                              />
+                            </Container>
+                          </Row>
+                        </Container>
                       </Container>
-                    </Container>
-                  </Row>
+                    </Row>
+                  ) : (
+                    <div className={styles.notFound}>
+                      Sorry, <br /> Showtimes and tickets not found...
+                    </div>
+                  )}
                 </Row>
               </Container>
             </Container>
@@ -203,4 +212,12 @@ class movieDetail extends Component {
   }
 }
 
-export default movieDetail;
+const mapStateToProps = (state) => ({
+  movie: state.movie,
+  auth: state.auth,
+  premiere: state.premiere,
+});
+
+const mapDispatchToProps = { getMovieById, getAllPremiere };
+
+export default connect(mapStateToProps, mapDispatchToProps)(movieDetail);

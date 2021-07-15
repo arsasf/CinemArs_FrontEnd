@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 import Logo from "../../../assets/img/NavBar/Tickitz.png";
 import Search from "../../../assets/img/NavBar/Search.png";
 import style from "../Navbar/Navbar.module.css";
-
 class NavbarCinemars extends Component {
   handleLogout = (params) => {
     if (params) {
@@ -23,7 +22,7 @@ class NavbarCinemars extends Component {
     }
   };
   render() {
-    console.log("ini navbar");
+    // console.log("ini navbar");
     return (
       <>
         <Navbar className="shadow" bg="light" expand="lg" fixed="top">

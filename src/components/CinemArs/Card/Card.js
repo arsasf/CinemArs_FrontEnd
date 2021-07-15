@@ -8,13 +8,14 @@ class Cards extends Component {
     this.props.history.push(`/cinemars/movie-detail/${id}/`);
   };
   render() {
-    const { movie_id, movie_name, movie_category, movie_img } = this.props.data;
+    const { movie_id, movie_name, movie_category, movie_image } =
+      this.props.data;
     return (
       <>
         <Card className={`${styles.cardBody} shadow`}>
           <Card.Img
             variant="top"
-            src={movie_img}
+            src={`${process.env.REACT_APP_IMAGE_URL}${movie_image}`}
             className={styles.cardImage}
           />
           <Card.Body>

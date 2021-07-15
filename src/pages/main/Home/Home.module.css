@@ -12,6 +12,17 @@
   height: max-content;
 }
 
+.notFound {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5f2eea;
+  font-weight: 600;
+  font-size: 18px;
+}
+
 /* Content1 */
 
 .containerContent1 {
@@ -204,6 +215,13 @@
 .rowCard {
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.rowCardLImit {
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .colCard {
@@ -213,6 +231,11 @@
 
 .rowCardImage {
   justify-content: space-between;
+  width: auto;
+}
+
+.rowCardImageLimit {
+  justify-content: flex-start;
   width: auto;
 }
 

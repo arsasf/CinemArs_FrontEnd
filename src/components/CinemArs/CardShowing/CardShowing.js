@@ -8,13 +8,8 @@ class Cards extends Component {
     this.props.history.push(`/cinemars/movie-detail/${id}`);
   };
   render() {
-    const {
-      movie_id,
-      movie_name,
-      movie_category,
-      movie_image,
-    } = this.props.data;
-    console.log(movie_image);
+    const { movie_id, movie_name, movie_category, movie_image } =
+      this.props.data;
     return (
       <>
         <Card className={`${styles.cardBody} `}>

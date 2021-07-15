@@ -8,6 +8,7 @@ import {
   Image,
   ToggleButtonGroup,
   ToggleButton,
+  Modal,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import styles from "./Signin.module.css";
@@ -27,6 +28,9 @@ class Signin extends Component {
         userEmail: "",
         userPassword: "",
       },
+      show: false,
+      info: "",
+      msg: "",
     };
   }
 
@@ -42,20 +46,57 @@ class Signin extends Component {
   handleLogin = (event) => {
     event.preventDefault();
     console.log(this.state.form);
-    this.props.login(this.state.form).then((result) => {
-      console.log(this.props.auth.data.token);
-      localStorage.setItem("token", this.props.auth.data.token);
-      localStorage.setItem("user_id", this.props.auth.data.user_id);
-      localStorage.setItem("user_email", this.props.auth.data.user_email);
-      localStorage.setItem("user_role", this.props.auth.data.user_role);
-      this.props.history.push("/cinemars/home");
-    });
+    this.props
+      .login(this.state.form)
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("token", this.props.auth.data.token);
+        this.setState({
+          show: true,
+          info: "INFO SIGNIN",
+          msg: res.value.data.msg,
+        });
+      })
+      .catch((err) => {
+        if (err) {
+          this.setState({
+            show: true,
+            info: "INFO ERROR SIGNIN",
+            msg: err.response.data.msg,
+          });
+        }
+        return {};
+      });
+  };
+
+  handleClose = () => {
+    if (this.state.info === "INFO ERROR SIGNIN") {
+      this.props.history.push("/signin");
+    }
+    this.props.history.push("/cinemars/home");
   };
 
   render() {
     const { userEmail, userPassword } = this.state;
     return (
       <>
+        <Modal
+          show={this.state.show}
+          onHide={this.handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>{this.state.info}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{this.state.msg}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
         <section className={styles.pageSignIn}>
           <Container fluid className={styles.container}>
             <Row>
