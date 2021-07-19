@@ -9,6 +9,10 @@
   padding-bottom: 100px;
 }
 
+.placeholder:disabled {
+  background-color: transparent;
+}
+
 .titlePaymentInfo h1,
 .methodPayment h1,
 .infoOrder h1 {
@@ -17,6 +21,19 @@
   font-size: 24px;
   font-weight: 700;
   color: #14142b;
+}
+.notFound {
+  padding-top: 10em;
+  padding-bottom: 5em;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  background-color: #e5e5e5;
+  align-items: center;
+  justify-content: center;
+  color: #5f2eea;
+  font-weight: 600;
+  font-size: 18px;
 }
 
 .paymentInfo {

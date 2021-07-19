@@ -1,0 +1,336 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+.containerCenter {
+  font-family: "Mulish", sans-serif;
+  margin-top: 50px;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.rowHome {
+  justify-content: space-around;
+  align-items: center;
+  height: max-content;
+}
+
+.notFound {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5f2eea;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+/* Content1 */
+
+.containerContent1 {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.containerContent2 {
+  background-color: #eaebee;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.containerContent3 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.containerContent4 {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.left h6 {
+  font-size: 18px;
+  color: #414141;
+  font-weight: 400;
+  text-align: left;
+  margin-left: -10px;
+}
+
+.left h1 {
+  color: #5f2eea;
+  font-size: 45px;
+  font-weight: bold;
+  text-align: left;
+  margin-left: -10px;
+}
+.right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img1 {
+  margin-top: 80px;
+  margin-bottom: 20px;
+}
+.img2 {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.img3 {
+  margin-top: 20px;
+  margin-bottom: 80px;
+}
+/* ================== */
+.showingText {
+  justify-content: space-between;
+}
+.titleShowingText,
+.titleShowingText:hover {
+  color: #5f2eea;
+  font-weight: 700;
+  font-size: 24px;
+  text-decoration: none;
+}
+.bar {
+  margin-left: 0px;
+  display: grid;
+}
+.activeBar {
+  height: 2px;
+  width: 100px;
+  margin-left: 30px;
+  background-color: #5f2eea;
+  color: #5f2eea;
+}
+.titleUpcomingText,
+.titleUpcomingText:hover {
+  color: black;
+  font-weight: 700;
+  font-size: 24px;
+  text-decoration: none;
+}
+.viewAll,
+.viewAll:hover {
+  color: #5f2eea;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+}
+.viewAllShowing,
+.viewAllShowing:hover {
+  color: #5f2eea;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.month {
+  justify-content: flex-start;
+  align-items: baseline;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  overflow-x: hidden;
+}
+
+.Button,
+.ButtonActive {
+  margin-top: 10px;
+  margin-right: 3px;
+  width: 91px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.Button {
+  color: white;
+  border-color: #5f2eea;
+  background-color: #5f2eea;
+}
+
+/* .Button:hover,
+.Button::after,
+.Button::before,
+.Button::after {
+  background-color: #5f2eea !important;
+  color: #f5f6f8 !important;
+  border-color: #5f2eea !important;
+  font-weight: lighter; */
+/* } */
+/* Content 3 */
+
+/* ============= */
+/* Content 4 */
+.rowContent4 {
+  font-family: "Mulish", sans-serif;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.boxForm {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  height: 372px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.titleText {
+  text-align: center;
+}
+.titleText h6 {
+  font-size: 16px;
+  color: #414141;
+  font-weight: lighter;
+}
+.titleText h1 {
+  font-size: 32px;
+  color: #5f2eea;
+  font-weight: bold;
+}
+
+.formEmail {
+  justify-content: space-between;
+  align-items: center;
+}
+.formEmail button {
+  margin-left: 5px;
+  background-color: #5f2eea !important;
+  border-color: #5f2eea !important;
+  color: #f5f6f8 !important;
+}
+.titleTextFooter h6 {
+  text-align: center;
+  font-size: 16px;
+  color: grey;
+  font-weight: lighter;
+}
+
+/* ================ */
+.rowCard {
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.rowCardLImit {
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.colCard {
+  width: auto;
+  padding-left: 8px;
+}
+
+.rowCardImage {
+  justify-content: space-between;
+  width: auto;
+}
+
+.rowCardImageLimit {
+  justify-content: flex-start;
+  width: auto;
+}
+
+/* Media query======================= */
+@media (max-width: 991.98px) {
+  .colCardImage {
+    width: 30%;
+    padding: 0;
+  }
+
+  .month {
+    overflow-x: scroll;
+  }
+
+  .colCard {
+    width: 30%;
+    padding: 0;
+  }
+
+  .containerContent1 {
+    margin-top: -80px;
+  }
+  .left {
+    width: 40%;
+  }
+  .left h6 {
+    text-align: left;
+    font-size: 11px;
+  }
+
+  .left h1 {
+    text-align: left;
+    font-size: 24px;
+  }
+  .right {
+    width: 60%;
+    justify-content: flex-end;
+  }
+  .month {
+    justify-content: space-between;
+    align-items: center;
+  }
+  .img1 {
+    height: 50%;
+  }
+  .img2 {
+    height: 50%;
+  }
+  .img3 {
+    height: 50%;
+  }
+  .containerContent2 {
+    padding-top: 0px;
+  }
+  .boxForm {
+    height: 200px;
+    display: flex;
+  }
+  .titleText h6 {
+    font-size: 12px;
+  }
+  .titleText h1 {
+    font-size: 26px;
+  }
+
+  .formEmail {
+    display: flex;
+    flex-direction: column;
+  }
+  .formEmail button {
+    margin-top: -10px;
+    width: 222px;
+    margin-left: 0px;
+    font-size: 13px;
+  }
+  .titleTextFooter h6 {
+    font-size: 12px;
+  }
+
+  input::-webkit-input-placeholder {
+    font-size: 13px;
+    line-height: 3;
+    text-align: left;
+  }
+  .titleUpcomingText,
+  .titleUpcomingText:hover {
+    font-size: 18px;
+  }
+  .titleShowingText,
+  .titleShowingText:hover {
+    font-size: 18px;
+  }
+
+  .activeBar {
+    width: 75px;
+    margin-left: 20px;
+  }
+}

@@ -132,7 +132,10 @@ class Order extends Component {
     const { reservedSeat, selectedSeat, data } = this.state;
     return (
       <>
-        <NavBar />
+        <NavBar
+          login={true}
+          user={this.props.auth.data ? this.props.auth.data : false}
+        />
         <section as={Container} fluid="true" className={styles.orderPage}>
           <Container className={styles.sectionAsideCombine}>
             <Row>

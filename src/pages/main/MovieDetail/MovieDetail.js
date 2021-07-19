@@ -7,7 +7,10 @@ import styles from "./MovieDetail.module.css";
 import CardMovie from "../../../components/CinemArs/CardMovie/CardMovie";
 import Bioskop from "../../../components/CinemArs/CardBioskop/Bioskop";
 import { getMovieById } from "../../../redux/actions/movie";
-import { getAllPremiere } from "../../../redux/actions/premiere";
+import {
+  getAllPremiere,
+  getAllPremiereSearch,
+} from "../../../redux/actions/premiere";
 import { connect } from "react-redux";
 
 class movieDetail extends Component {
@@ -22,7 +25,8 @@ class movieDetail extends Component {
       sort: "premiere.premiere_id ASC",
       searchByLocation: "",
       searchByDate: "premiere.show_time_date",
-      showDate: "2021-07-15",
+      showDate: new Date().toISOString().slice(0, 10),
+      setLocation: "All Location",
     };
   }
 
@@ -50,9 +54,17 @@ class movieDetail extends Component {
 
   getDataBioskopById = () => {
     const { id } = this.props.match.params;
-    const { page, limit, sort, searchByLocation, searchByDate } = this.state;
+    const searchByDate = this.state.showDate;
+    const { page, limit, sort, searchByLocation } = this.state;
     this.props
-      .getAllPremiere(id, page, limit, sort, searchByLocation, searchByDate)
+      .getAllPremiereSearch(
+        id,
+        page,
+        limit,
+        sort,
+        searchByLocation,
+        searchByDate
+      )
       .then((res) => {
         this.setState({
           ...this.state,
@@ -72,43 +84,114 @@ class movieDetail extends Component {
     });
   };
 
-  handleSearchByDate = (event) => {
-    this.setState({
-      ...this.state,
-      [event.target.name]: event.target.value,
-    });
-    const { id } = this.props.match.params;
-    const searchByDate = `${event.target.value}`;
-    console.log(searchByDate, typeof searchByDate);
-    const { page, limit, sort, searchByLocation } = this.state;
-    this.props
-      .getAllPremiere(
-        id,
-        page,
-        limit,
-        sort,
-        searchByLocation,
-        event.target.value
-      )
-      .then((res) => {
-        this.setState({
-          ...this.state,
-          dataPremiere: res.value.data.data,
-          totalPage: res.value.data.pagination.totalpage,
-        });
-      })
-      .catch((err) => {
-        this.setState({
-          ...this.state,
-          dataPremiere: [],
-        });
+  handleSearchByDate = (event, search) => {
+    if (search === "") {
+      this.setState({
+        ...this.state,
+        [event.target.name]: event.target.value,
       });
+      const { id } = this.props.match.params;
+      const searchByDate = event.target.value;
+      const searchByLocation = search;
+
+      const { page, limit, sort } = this.state;
+      this.props
+        .getAllPremiereSearch(
+          id,
+          page,
+          limit,
+          sort,
+          searchByLocation,
+          searchByDate
+        )
+        .then((res) => {
+          this.setState({
+            ...this.state,
+            dataPremiere: res.value.data.data,
+            totalPage: res.value.data.pagination.totalpage,
+          });
+        })
+        .catch((err) => {
+          this.setState({
+            ...this.state,
+            dataPremiere: [],
+          });
+        });
+    } else {
+      if (search === "All Location") {
+        this.setState({
+          ...this.state,
+          setLocation: "",
+        });
+        const { id } = this.props.match.params;
+        const searchByDate = event;
+        const searchByLocation = "";
+
+        const { page, limit, sort } = this.state;
+        this.props
+          .getAllPremiereSearch(
+            id,
+            page,
+            limit,
+            sort,
+            searchByLocation,
+            searchByDate
+          )
+          .then((res) => {
+            this.setState({
+              ...this.state,
+              dataPremiere: res.value.data.data,
+              totalPage: res.value.data.pagination.totalpage,
+            });
+          })
+          .catch((err) => {
+            this.setState({
+              ...this.state,
+              dataPremiere: [],
+            });
+          });
+      }
+      this.setState({
+        ...this.state,
+        setLocation: search,
+      });
+      const { id } = this.props.match.params;
+      const searchByDate = event;
+      const searchByLocation = search;
+
+      const { page, limit, sort } = this.state;
+      this.props
+        .getAllPremiereSearch(
+          id,
+          page,
+          limit,
+          sort,
+          searchByLocation,
+          searchByDate
+        )
+        .then((res) => {
+          this.setState({
+            ...this.state,
+            dataPremiere: res.value.data.data,
+            totalPage: res.value.data.pagination.totalpage,
+          });
+        })
+        .catch((err) => {
+          this.setState({
+            ...this.state,
+            dataPremiere: [],
+          });
+        });
+    }
   };
   render() {
-    const { data, dataPremiere } = this.state;
+    const { data, dataPremiere, setLocation, showDate } = this.state;
     return (
       <>
-        <NavBar />
+        <NavBar
+          login={true}
+          user={this.props.auth.data ? this.props.auth.data : false}
+        />
         <Container fluid className={styles.containerCenter}>
           <Row className={styles.rowHome}>
             {/* <!-- =================Content1============--> */}
@@ -129,11 +212,10 @@ class movieDetail extends Component {
                             type="date"
                             name="showDate"
                             placeholder="dd-mm-yyyy"
-                            defaultValue={this.state.showDate}
                             min="2021-01-01"
                             max="2021-12-31"
                             value={this.state.showDate}
-                            onChange={(e) => this.handleSearchByDate(e)}
+                            onChange={(e) => this.handleSearchByDate(e, "")}
                             className={styles.placeholder}
                           />
                         </div>
@@ -143,16 +225,51 @@ class movieDetail extends Component {
                               variant="fff"
                               className={styles.dropdownSelectMovie}
                             >
-                              Location
+                              {setLocation}
                             </Dropdown.Toggle>
                             <Dropdown.Menu className={styles.menuListMovie}>
-                              <Dropdown.Item className={styles.listMovie}>
+                              <Dropdown.Item
+                                className={styles.listMovie}
+                                onClick={() =>
+                                  this.handleSearchByDate(
+                                    showDate,
+                                    "All Location"
+                                  )
+                                }
+                              >
+                                All Location
+                              </Dropdown.Item>
+                              <Dropdown.Item
+                                className={styles.listMovie}
+                                onClick={() =>
+                                  this.handleSearchByDate(
+                                    showDate,
+                                    "Banjarmasin"
+                                  )
+                                }
+                              >
                                 Banjarmasin
                               </Dropdown.Item>
-                              <Dropdown.Item className={styles.listMovie}>
+                              <Dropdown.Item
+                                className={styles.listMovie}
+                                onClick={() =>
+                                  this.handleSearchByDate(
+                                    showDate,
+                                    "Banjarbaru"
+                                  )
+                                }
+                              >
                                 Banjarbaru
                               </Dropdown.Item>
-                              <Dropdown.Item className={styles.listMovie}>
+                              <Dropdown.Item
+                                className={styles.listMovie}
+                                onClick={() =>
+                                  this.handleSearchByDate(
+                                    showDate,
+                                    "Barito Kuala"
+                                  )
+                                }
+                              >
                                 Barito Kuala
                               </Dropdown.Item>
                             </Dropdown.Menu>
@@ -198,7 +315,7 @@ class movieDetail extends Component {
                     </Row>
                   ) : (
                     <div className={styles.notFound}>
-                      Sorry, <br /> Showtimes and tickets not found...
+                      Sorry, <br /> Showtimes and tickets for today not found...
                     </div>
                   )}
                 </Row>
@@ -218,6 +335,10 @@ const mapStateToProps = (state) => ({
   premiere: state.premiere,
 });
 
-const mapDispatchToProps = { getMovieById, getAllPremiere };
+const mapDispatchToProps = {
+  getMovieById,
+  getAllPremiere,
+  getAllPremiereSearch,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(movieDetail);

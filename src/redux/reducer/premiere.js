@@ -1,5 +1,7 @@
 const initialState = {
   data: [],
+  dataSearch: [],
+  paginationSearch: {},
   pagination: {},
   isLoading: false,
   isError: false,
@@ -31,6 +33,30 @@ const premiere = (state = initialState, action) => {
         data: [],
         msg: action.payload.response.data.msg,
         pagination: {},
+      };
+    case "GET_ALL_PREMIERE_SEARCH_PENDING":
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case "GET_ALL_PREMIERE_SEARCH_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        dataSearch: action.payload.data.data,
+        msg: action.payload.data.msg,
+        paginationSearch: action.payload.data.pagination,
+      };
+    case "GET_ALL_PREMIERE_SEARCH_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        dataSearch: [],
+        msg: action.payload.response.data.msg,
+        paginationSearch: {},
       };
     default:
       return state;

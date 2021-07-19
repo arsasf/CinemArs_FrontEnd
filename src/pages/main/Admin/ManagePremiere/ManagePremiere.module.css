@@ -1,12 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
 
 .fullArea {
+  padding-top: 6em;
   background-color: #eaebee;
   font-family: "Mulish", sans-serif;
 }
 
 .contentArea {
   background-color: transparent;
+  padding: 0;
 }
 
 .contentArea h1 {

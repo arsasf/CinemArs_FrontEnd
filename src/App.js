@@ -11,19 +11,21 @@ import BasicReact from "./pages/learning/BasicReact/BasicReact";
 import BasicHome from "./pages/learning/Home/Home";
 import BasicMovieDetail from "./pages/learning/MovieDetail/MovieDetail";
 import BasicRedux from "./pages/learning/BasicRedux/BasicRedux";
-import Login from "./pages/auth/Login/Login";
 // =====================End=================================
 
 // ======================Page CinemArs=====================
 import Signup from "./pages/auth/Signup/Signup";
 import Signin from "./pages/auth/Signin/Signin";
 import Home from "./pages/main/Home/Home";
+import LandingPage from "./pages/main/LandingPage/LandingPage";
 import MovieDetail from "./pages/main/MovieDetail/MovieDetail";
 import Order from "./pages/main/Order/Order";
 import Payment from "./pages/main/Payment/Payment";
 import Profile from "./pages/main/Profile/Profile";
 import ManageMovie from "./pages/main/Admin/ManageMovie/ManageMovie";
 import ManagePremiere from "./pages/main/Admin/ManagePremiere/ManagePremiere";
+import Dashboard from "./pages/main/Admin/Dashboard/Dashboard";
+
 // ========================End=============================
 
 // ========================Component CinemArs===============
@@ -40,13 +42,6 @@ class App extends Component {
           <Router>
             <Switch>
               {/* ================Learning Live Coding=============== */}
-              <PublicRoute
-                restricted={true}
-                path="/login"
-                exact
-                component={Login}
-              />
-              <PublicRoute restricted={true} path="/" exact component={Login} />
               <PublicRoute
                 path="/learning/basic-react"
                 exact
@@ -77,6 +72,7 @@ class App extends Component {
                 component={Signin}
               />
               <PublicRoute path="/signup" exact component={Signup} />
+              <PublicRoute path="/" exact component={LandingPage} />
               <PrivateRoute path="/cinemars/home" exact component={Home} />
               <Route
                 path="/cinemars/movie-detail/:id"
@@ -99,6 +95,11 @@ class App extends Component {
                 path="/cinemars/manage-premiere/:id"
                 exact
                 component={ManagePremiere}
+              />
+              <PrivateRoute
+                path="/cinemars/dashboard"
+                exact
+                component={Dashboard}
               />
               {/* =======================End========================= */}
 

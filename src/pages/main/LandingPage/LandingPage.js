@@ -18,7 +18,7 @@ import {
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-class Home extends Component {
+class LandingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -155,12 +155,10 @@ class Home extends Component {
       totalDataMovie,
       totalDataMovieMonth,
     } = this.state;
+
     return (
       <>
-        <NavBar
-          login={true}
-          user={this.props.auth.data ? this.props.auth.data : false}
-        />
+        <NavBar />
         <Container fluid className={styles.containerCenter}>
           <Row className={styles.rowHome}>
             {/* Content-1 */}
@@ -438,9 +436,8 @@ class Home extends Component {
 
 const mapStateToProps = (state) => ({
   movie: state.movie,
-  auth: state.auth,
 });
 
 const mapDispatchToProps = { getAllMovie };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

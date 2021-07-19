@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Mulish&display=swap");
+
+.fullArea {
+  background-color: #eaebee;
+  font-family: "Mulish", sans-serif;
+  padding-top: 8em;
+  padding-bottom: 3em;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  height: 100%t;
+}
+
+.left {
+  padding: 1em;
+}
+
+.right {
+  padding: 1em;
+}
+
+.right h5,
+.left h5 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 1em;
+}
+
+.boxFilter,
+.boxDashboard {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border-radius: 10px;
+}
+
+.selectMovie {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.dropdownSelectMovie {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  height: 45px;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #4e4b66;
+  border: 2px solid #dedede;
+}
+
+.dropdownSelectMovie:hover,
+.dropdownSelectMovie:active,
+.dropdownSelectMovie:focus {
+  border: 2px solid #5f2eea;
+  background-color: transparent;
+  font-size: 14px;
+  color: #4e4b66;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.menuListMovie {
+  width: 100%;
+  height: 8em;
+  overflow-y: scroll;
+  text-transform: capitalize;
+  padding: 1em;
+  border: 2px solid #dedede;
+}
+
+.menuListMovie::-webkit-scrollbar-track {
+  border: 1px solid #eaebee;
+  padding: 2px 0;
+  background-color: #eaebee;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.menuListMovie::-webkit-scrollbar {
+  width: 10px;
+}
+
+.menuListMovie::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px #5f2eea;
+  background-color: #5f2eea;
+  border: 1px solid #eaebee;
+}
+
+.listMovie {
+  font-size: 14px;
+  color: #4e4b66;
+  font-weight: 500;
+}
+
+.listMovie:hover {
+  background-color: #5f2eea;
+  color: white;
+  border-radius: 3px;
+}
+
+.buttonFilter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #5f2eea;
+  height: 45px;
+  border-radius: 3px;
+  font-size: 14px;
+  color: white;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.buttonReset {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #5f2eea;
+  height: 45px;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #5f2eea;
+  margin-bottom: 1em;
+}
+
+.buttonFilter:hover,
+.buttonFilter:active,
+.buttonFilter:focus,
+.buttonReset:hover,
+.buttonReset:active,
+.buttonReset:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: black;
+  border: 2px solid black;
+  color: white;
+}

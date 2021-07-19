@@ -15,3 +15,19 @@ export const getAllPremiere = (
     ),
   };
 };
+
+export const getAllPremiereSearch = (
+  id,
+  page,
+  limit,
+  sort,
+  searchByLocation,
+  searchByDate
+) => {
+  return {
+    type: "GET_ALL_PREMIERE",
+    payload: axiosApiIntances.get(
+      `premiere/movie-search/${id}?page=${page}&limit=${limit}&sort=${sort}&searchByLocation=${searchByLocation}&searchByDate=${searchByDate}`
+    ),
+  };
+};

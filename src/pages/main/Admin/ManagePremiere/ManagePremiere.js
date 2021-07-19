@@ -4,10 +4,14 @@ import ImagePremiere from "../../../../assets/img/background-avangers.png";
 import cineOne21 from "../../../../assets/img/cineone21.png";
 import hiflix from "../../../../assets/img/hiflix.png";
 import ebu from "../../../../assets/img/ebv.png";
+import Navbar from "../../../../components/CinemArs/Navbar/Navbar";
+import Footer from "../../../../components/CinemArs/Footer/Footer";
+import { connect } from "react-redux";
 
-export default function ManagePremiere() {
+function ManagePremiere(props) {
   return (
     <>
+      <Navbar login={true} user={props.auth.data ? props.auth.data : false} />
       <Container fluid className={styles.fullArea}>
         <Container className={styles.contentArea}>
           <h1>Form Schedule</h1>
@@ -162,6 +166,16 @@ export default function ManagePremiere() {
           <h1>Data Schedule</h1>
         </Container>
       </Container>
+      <Footer />
     </>
   );
 }
+
+const mapStateToProps = (state) => ({
+  movie: state.movie,
+  auth: state.auth,
+  premiere: state.premiere,
+  order: state.order,
+});
+
+export default connect(mapStateToProps)(ManagePremiere);

@@ -270,7 +270,10 @@ class ManageMovie extends Component {
     const { isUpdate } = this.state;
     return (
       <>
-        <Navbar />
+        <Navbar
+          login={true}
+          user={this.props.auth.data ? this.props.auth.data : false}
+        />
         <Container fluid className={styles.adminManageMovie}>
           <Container className={styles.containerMangeMovie}>
             <Row className={styles.rowTitle}>

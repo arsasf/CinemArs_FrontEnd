@@ -2,6 +2,9 @@ const initialState = {
   data: {},
   dataBooking: {},
   dataBookingSeat: [],
+  dataReports: [],
+  dataMovie: [],
+  dataHistory: [],
   isLoading: false,
   isError: false,
   msg: "",
@@ -9,6 +12,30 @@ const initialState = {
 
 const order = (state = initialState, action) => {
   switch (action.type) {
+    case "GET_ALL_MOVIE_PENDING":
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case "GET_ALL_MOVIE_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        dataMovie: action.payload.data.data,
+        msg: action.payload.data.msg,
+        pagination: action.payload.data.pagination,
+      };
+    case "GET_ALL_MOVIE_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        dataMovie: [],
+        msg: action.payload.response.data.msg,
+        pagination: {},
+      };
     case "GET_BOOKING_PENDING":
       return {
         ...state,
@@ -51,6 +78,50 @@ const order = (state = initialState, action) => {
         isLoading: false,
         isError: true,
         dataBookingSeat: [],
+        msg: action.payload.response.data.msg,
+      };
+    case "GET_BOOKING_REPORTS_PENDING":
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case "GET_BOOKING_REPORTS_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        dataReports: action.payload.data.data,
+        msg: action.payload.data.msg,
+      };
+    case "GET_BOOKING_REPORTS_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        dataReports: [],
+        msg: action.payload.response.data.msg,
+      };
+    case "GET_BOOKING_HISTORY_PENDING":
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case "GET_BOOKING_HISTORY_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        dataHistory: action.payload.data.data,
+        msg: action.payload.data.msg,
+      };
+    case "GET_BOOKING_HISTORY_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        dataHistory: [],
         msg: action.payload.response.data.msg,
       };
     case "CREATE_BOOKING_PENDING":
