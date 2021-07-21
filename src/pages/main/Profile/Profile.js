@@ -21,6 +21,7 @@ import {
 } from "../../../redux/actions/userProfile";
 import { getBookingHistory } from "../../../redux/actions/order";
 import CardProfile from "../../../components/CinemArs/CardProfile/CardProfile";
+import { Warning, CheckCircle, XSquare } from "phosphor-react";
 
 class Profile extends Component {
   constructor(props) {
@@ -38,29 +39,21 @@ class Profile extends Component {
       page: 1,
       limit: 4,
       show: false,
-      setShow: false,
       id: this.props.auth.data.user_id,
       active: false,
       detail: false,
       dataHistory: [],
+      error: false,
+      msg: "",
     };
   }
 
   componentDidMount() {
-    console.log("this get Data running");
     this.getData();
     this.getDataHistory();
   }
 
-  setShow = (event) => {
-    this.setState({
-      ...this.state.from,
-      show: event,
-    });
-  };
-
   getData = () => {
-    console.log("Get Data !");
     const id = this.state.id;
     this.props.getUserById(id);
   };
@@ -74,7 +67,7 @@ class Profile extends Component {
         });
       })
       .catch((err) => {
-        console.log(err);
+        return [];
       });
   };
   resetData = (event) => {
@@ -91,7 +84,6 @@ class Profile extends Component {
   };
 
   changeText = (event) => {
-    // console.log(typeof event.target.value);
     this.setState({
       form: {
         ...this.state.form,
@@ -110,8 +102,6 @@ class Profile extends Component {
   };
 
   setUpdate = (data) => {
-    console.log("Set Update !");
-    console.log(data);
     this.setState({
       isUpdate: true,
       id: data.user_id,
@@ -126,8 +116,6 @@ class Profile extends Component {
   };
   updateData = (event) => {
     event.preventDefault();
-    console.log("Update Data !");
-    const id = localStorage.getItem("user_id");
     this.setState({ isUpdate: false });
     this.resetData(event);
     const formData = new FormData();
@@ -136,32 +124,38 @@ class Profile extends Component {
     formData.append("userEmail", this.state.form.userEmail);
     formData.append("userPhoneNumber", this.state.form.userPhoneNumber);
     formData.append("image", this.state.form.image);
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
+    // for (var pair of formData.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
     this.props
-      .updateUser(id, formData)
+      .updateUser(formData)
       .then((res) => {
-        console.log("ini res");
-        console.log(res);
+        this.setState({
+          ...this.state,
+          show: true,
+          error: false,
+          msg: "Success Updated !",
+        });
         this.getData();
-        this.resetData();
       })
       .catch((err) => {
-        console.log(err.response);
+        console.log(err);
+        this.setState({
+          ...this.state,
+          show: true,
+          error: true,
+          msg: err.response.data.msg,
+        });
+        return {};
       });
   };
 
   updatePassword = (event) => {
-    console.log("update password");
-    console.log(event);
-    const id = localStorage.getItem("user_id");
     event.preventDefault();
     this.resetData(event);
-    console.log(this.state.form);
     const { form } = this.state;
     this.props
-      .updatePassword(id, form)
+      .updatePassword(form)
       .then((res) => {
         if (res) {
           alert("please login");
@@ -171,7 +165,13 @@ class Profile extends Component {
         this.resetData();
       })
       .catch((err) => {
-        console.log(err.response);
+        this.setState({
+          ...this.state,
+          show: true,
+          error: true,
+          msg: err.response.data.msg,
+        });
+        return {};
       });
   };
 
@@ -197,6 +197,44 @@ class Profile extends Component {
     };
     return (
       <>
+        <Toast
+          className={
+            this.state.error === false
+              ? styles.createDataToast
+              : styles.createDataToastError
+          }
+          onClose={() =>
+            this.setState({
+              ...this.state,
+              show: false,
+            })
+          }
+          show={this.state.show}
+          delay={5000}
+          autohide
+        >
+          <Toast.Body className={styles.bodyToast}>
+            <div className={styles.boxClose}>
+              <XSquare
+                size={24}
+                color="white"
+                onClick={() =>
+                  this.setState({
+                    ...this.state,
+                    show: false,
+                  })
+                }
+                className={styles.iconClose}
+              />
+            </div>
+            {this.state.error === false ? (
+              <CheckCircle size={80} color="#34ef53" />
+            ) : (
+              <Warning size={80} color="red" />
+            )}
+            {this.state.msg}
+          </Toast.Body>
+        </Toast>
         <NavBar
           login={true}
           user={this.props.auth.data ? this.props.auth.data : false}
@@ -363,24 +401,9 @@ class Profile extends Component {
                                 variant="dark"
                                 className={`${styles.buttonSubmit} shadow`}
                                 type="submit"
-                                onClick={() => this.setShow(true)}
                               >
                                 Update Changes
                               </Button>
-                              <Toast
-                                className={styles.createDataToast}
-                                onClose={() => this.setShow(false)}
-                                show={this.state.show}
-                                delay={5000}
-                                autohide
-                              >
-                                <Toast.Header>
-                                  <strong className="mr-auto">Message !</strong>
-                                </Toast.Header>
-                                <Toast.Body className={styles.bodyToast}>
-                                  {this.props.userProfile.msg}
-                                </Toast.Body>
-                              </Toast>
                             </Col>
                           </Row>
                         </Form>
@@ -451,128 +474,121 @@ class Profile extends Component {
                                 variant="dark"
                                 className={`${styles.buttonSubmit} shadow`}
                                 type="submit"
-                                onClick={() => this.setShow(true)}
                               >
                                 Update Changes
                               </Button>
-                              <Toast
-                                className={styles.createDataToast}
-                                onClose={() => this.setShow(false)}
-                                show={this.state.show}
-                                delay={5000}
-                                autohide
-                              >
-                                <Toast.Header>
-                                  <strong className="mr-auto">Message !</strong>
-                                </Toast.Header>
-                                <Toast.Body className={styles.bodyToast}>
-                                  {this.props.userProfile.msg}
-                                </Toast.Body>
-                              </Toast>
                             </Col>
                           </Row>
                         </Form>
                       </div>
                     ) : (
                       <div className={styles.orderHistory}>
-                        {this.state.dataHistory.map((item, index) => {
-                          return (
-                            <div key={index} className={`${styles.boxOrder}`}>
-                              <div className={styles.boxInfo}>
-                                <div>
-                                  <h6>{formatDate(item.booking_created_at)}</h6>
-                                  <h6>{item.movie_name}</h6>
-                                </div>
-                                <Image
-                                  src={`${process.env.REACT_APP_IMAGE_URL}${item.premiere_image}`}
-                                  alt="logo premiere"
-                                  className={styles.logo}
-                                />
-                              </div>
-                              <hr />
-                              <div className={styles.boxDetails}>
-                                <Button
-                                  variant="fff"
-                                  className={styles.buttonTicket}
-                                >
-                                  Ticket Is Active
-                                </Button>
-                                {this.state.detail === false ? (
-                                  <div
-                                    className={styles.detail}
-                                    onClick={() => this.handleDetail(true)}
-                                  >
-                                    <h5>Show Details</h5>
-                                    <CaretDown size={24} color="#414141" />
-                                  </div>
-                                ) : (
-                                  <div
-                                    className={styles.detailClose}
-                                    onClick={() => this.handleDetail(false)}
-                                  >
-                                    <h5>Close Details</h5>
-                                    <CaretUp size={24} color="#5f2eea" />
-                                  </div>
-                                )}
-                              </div>
-                              {this.state.detail === true && (
-                                <div>
-                                  <hr />
-                                  <div className={styles.boxShowDetails}>
-                                    <h6>Movie </h6>
-                                    <h6>{item.movie_name}</h6>
-                                  </div>
-                                  <div className={styles.boxShowDetails}>
-                                    <h6>Release Date</h6>
-                                    <h6>
-                                      {formatDate(item.movie_release_date)}
-                                    </h6>
-                                  </div>
-                                  <div className={styles.boxShowDetails}>
-                                    <h6>Duration</h6>
-                                    <h6>{item.movie_duration}</h6>
-                                  </div>
-                                  <div className={styles.boxShowDetails}>
-                                    <h6>Premiere</h6>
-                                    <h6>{item.premiere_name}</h6>
-                                  </div>
-                                  <div className={styles.boxShowDetails}>
-                                    <h6>Location Premiere</h6>
-                                    <h6>{item.location_address}</h6>
-                                  </div>
-                                  <div className={styles.boxShowDetails}>
-                                    <h6>Schedule</h6>
-                                    <h6>{`${formatDate(item.show_time_date)} ${
-                                      item.show_time_clock
-                                    } `}</h6>
-                                  </div>
-                                  <div className={styles.boxShowDetails}>
-                                    <h6>Method Payment</h6>
-                                    <h6>{item.booking_payment_method}</h6>
-                                  </div>
-                                  <div className={styles.boxShowDetails}>
-                                    <h6>Total Tickets</h6>
-                                    <h6>{item.booking_ticket} Pieces</h6>
-                                  </div>
-                                  <div className={styles.boxShowDetails}>
-                                    <h6>Total Prices</h6>
-                                    <h6>${item.booking_total_price}</h6>
-                                  </div>
-                                  <div className={styles.boxShowDetails}>
-                                    <h6>Booking Status</h6>
-                                    <h6>{item.booking_status}</h6>
-                                  </div>
-                                  <div className={styles.boxShowDetails}>
-                                    <h6>Booking Created</h6>
+                        {this.state.dataHistory.length > 0 ? (
+                          this.state.dataHistory.map((item, index) => {
+                            return (
+                              <div key={index} className={`${styles.boxOrder}`}>
+                                <div className={styles.boxInfo}>
+                                  <div>
                                     <h6>
                                       {formatDate(item.booking_created_at)}
                                     </h6>
+                                    <h6>{item.movie_name}</h6>
                                   </div>
+                                  <Image
+                                    src={`${process.env.REACT_APP_IMAGE_URL}${item.premiere_image}`}
+                                    alt="logo premiere"
+                                    className={styles.logo}
+                                  />
                                 </div>
-                              )}
-                            </div>
-                          );
-                        })}
+                                <hr />
+                                <div className={styles.boxDetails}>
+                                  <Button
+                                    variant="fff"
+                                    className={styles.buttonTicket}
+                                  >
+                                    Ticket Is Active
+                                  </Button>
+                                  {this.state.detail === false ? (
+                                    <div
+                                      className={styles.detail}
+                                      onClick={() => this.handleDetail(true)}
+                                    >
+                                      <h5>Show Details</h5>
+                                      <CaretDown size={24} color="#414141" />
+                                    </div>
+                                  ) : (
+                                    <div
+                                      className={styles.detailClose}
+                                      onClick={() => this.handleDetail(false)}
+                                    >
+                                      <h5>Close Details</h5>
+                                      <CaretUp size={24} color="#5f2eea" />
+                                    </div>
+                                  )}
+                                </div>
+                                {this.state.detail === true && (
+                                  <div>
+                                    <hr />
+                                    <div className={styles.boxShowDetails}>
+                                      <h6>Movie </h6>
+                                      <h6>{item.movie_name}</h6>
+                                    </div>
+                                    <div className={styles.boxShowDetails}>
+                                      <h6>Release Date</h6>
+                                      <h6>
+                                        {formatDate(item.movie_release_date)}
+                                      </h6>
+                                    </div>
+                                    <div className={styles.boxShowDetails}>
+                                      <h6>Duration</h6>
+                                      <h6>{`${item.movie_duration_hours} ${item.movie_duration_minutes}`}</h6>
+                                    </div>
+                                    <div className={styles.boxShowDetails}>
+                                      <h6>Premiere</h6>
+                                      <h6>{item.premiere_name}</h6>
+                                    </div>
+                                    <div className={styles.boxShowDetails}>
+                                      <h6>Location Premiere</h6>
+                                      <h6>{item.location_address}</h6>
+                                    </div>
+                                    <div className={styles.boxShowDetails}>
+                                      <h6>Schedule</h6>
+                                      <h6>{`${formatDate(
+                                        item.show_time_date
+                                      )} ${item.show_time_clock} `}</h6>
+                                    </div>
+                                    <div className={styles.boxShowDetails}>
+                                      <h6>Method Payment</h6>
+                                      <h6>{item.booking_payment_method}</h6>
+                                    </div>
+                                    <div className={styles.boxShowDetails}>
+                                      <h6>Total Tickets</h6>
+                                      <h6>{item.booking_ticket} Pieces</h6>
+                                    </div>
+                                    <div className={styles.boxShowDetails}>
+                                      <h6>Total Prices</h6>
+                                      <h6>${item.booking_total_price}</h6>
+                                    </div>
+                                    <div className={styles.boxShowDetails}>
+                                      <h6>Booking Status</h6>
+                                      <h6>{item.booking_status}</h6>
+                                    </div>
+                                    <div className={styles.boxShowDetails}>
+                                      <h6>Booking Created</h6>
+                                      <h6>
+                                        {formatDate(item.booking_created_at)}
+                                      </h6>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })
+                        ) : (
+                          <div className={styles.notFound}>
+                            Sorry, <br /> Order history not available...
+                          </div>
+                        )}
                       </div>
                     )}
                   </Container>

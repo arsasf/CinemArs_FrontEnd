@@ -22,6 +22,79 @@
   object-fit: cover;
 }
 
+.imgMovie {
+  width: 6em;
+  height: 6em;
+  object-fit: cover;
+  border-radius: 10%;
+  margin-right: 2em;
+}
+
+.boxSearchMovie {
+  background-color: white;
+  padding: 1em;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  color: #414141;
+  border: 2px solid whitesmoke;
+}
+
+.boxSearchMovie:hover {
+  background-color: #5f2eea;
+  color: white;
+  cursor: pointer;
+}
+.notFound {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: #5f2eea;
+  font-weight: 600;
+  font-size: 18px;
+}
+.modalBody {
+  overflow-y: scroll;
+  height: 10em;
+}
+
+.modalBody::-webkit-scrollbar-track {
+  border: 1px solid #eaebee;
+  padding: 2px 0;
+  background-color: #eaebee;
+  bottom: 0;
+  border-radius: 5px;
+}
+
+.modalBody::-webkit-scrollbar {
+  width: 10px;
+}
+
+.modalBody::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px #5f2eea;
+  background-color: #5f2eea;
+  border: 1px solid #eaebee;
+}
+
+.boxInfoSearch {
+  width: 100%;
+}
+
+.infoSearch {
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoSearch h5 {
+  text-align: left;
+  font-size: 16px;
+  font-weight: 400;
+}
+
 .toggleProfile::after {
   display: none;
 }

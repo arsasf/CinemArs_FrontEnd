@@ -1,18 +1,73 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import { Row, Dropdown, Col, Image } from "react-bootstrap";
+import { Row, Dropdown, Col, Image, Button, Modal } from "react-bootstrap";
 import styles from "./CardProfile.module.css";
+import { Warning, XSquare } from "phosphor-react";
 
 class CardProfile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      show: false,
+      msg: "",
+    };
+  }
+
+  handleShow = (param1) => {
+    this.setState({
+      show: param1,
+      msg: `Are you sure to update ?`,
+    });
+  };
+
+  handleSure = (data, event) => {
+    this.props.handleUpdate(data, event);
+    this.setState({
+      ...this.state,
+      show: false,
+    });
+  };
   render() {
     const { user_first_name, user_last_name, user_role, user_image } =
       this.props.data;
-    const { handleUpdate, data } = this.props;
-    console.log("ini props");
-    console.log(this.props);
-    console.log(this.state);
+    const { data } = this.props;
     return (
       <>
+        <Modal
+          show={this.state.show}
+          onHide={() => this.handleShow(false)}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Body className={styles.modalBody}>
+            <div className={styles.boxClose}>
+              <XSquare
+                size={24}
+                color="white"
+                className={styles.iconClose}
+                onClick={() => this.handleShow(false)}
+              />
+            </div>
+            <Warning size={60} color="yellow" />
+            {this.state.msg}
+            <div className={styles.boxThumbs}>
+              <Button
+                variant="light"
+                className={styles.buttonSure}
+                onClick={(event) => this.handleSure(data, event)}
+              >
+                Sure
+              </Button>
+              <Button
+                variant="dark"
+                className={styles.buttonCancel}
+                onClick={() => this.handleShow(false)}
+              >
+                Cancel
+              </Button>
+            </div>
+          </Modal.Body>
+        </Modal>
         <Row className={styles.rowHeaderCard}>
           <Row className={styles.rowHeaderInfoCard}>
             <Link to="#" className={styles.infoCard}>
@@ -30,31 +85,16 @@ class CardProfile extends Component {
               <Dropdown.Menu className={styles.menuDropdown}>
                 <Dropdown.Item
                   className={styles.listSort}
-                  onClick={(event) =>
-                    window.confirm(
-                      `${user_first_name}, Are you sure to update profile ?`
-                    ) && handleUpdate(data, event)
-                  }
+                  onClick={() => this.handleShow(true)}
                 >
                   Update Profile
                 </Dropdown.Item>
-                {/* <Dropdown.Item
-                  className={styles.listSort}
-                  onClick={() =>
-                    window.confirm(
-                      `${user_first_name}, Are you sure to delete image profile ?`
-                    ) && handleDelete(user_image)
-                  }
-                >
-                  Delete Image
-                </Dropdown.Item> */}
               </Dropdown.Menu>
             </Dropdown>
           </Row>
           <Col className={styles.rowHeaderInfoCard2}>
             <Image
-              // src="# "
-              src={`http://localhost:3001/api/${user_image}`}
+              src={`${process.env.REACT_APP_IMAGE_URL}${user_image}`}
               className={styles.imageProfile}
             />
           </Col>

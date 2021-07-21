@@ -3,6 +3,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   msg: "",
+  dataSearch: [],
 };
 
 const userProfile = (state = initialState, action) => {
@@ -27,6 +28,28 @@ const userProfile = (state = initialState, action) => {
         isLoading: false,
         isError: true,
         data: [],
+        msg: action.payload.response.data.msg,
+      };
+    case "GET_DATA_SEARCH_PENDING":
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case "GET_DATA_SEARCH_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        dataSearch: action.payload.data.data,
+        msg: action.payload.data.msg,
+      };
+    case "GET_DATA_SEARCH_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        dataSearch: [],
         msg: action.payload.response.data.msg,
       };
     case "UPDATE_USER_PENDING":

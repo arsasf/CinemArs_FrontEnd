@@ -7,16 +7,25 @@ export const getUserById = (id) => {
   };
 };
 
-export const updateUser = (id, formData) => {
+export const getDataSearch = (location, movie) => {
   return {
-    type: "UPDATE_USER",
-    payload: axiosApiIntances.patch(`auth/update-profile/${id}`, formData),
+    type: "GET_DATA_SEARCH",
+    payload: axiosApiIntances.get(
+      `location/user/search?location=${location}&movie=${movie}`
+    ),
   };
 };
 
-export const updatePassword = (id, form) => {
+export const updateUser = (formData) => {
+  return {
+    type: "UPDATE_USER",
+    payload: axiosApiIntances.patch(`auth/update-profile`, formData),
+  };
+};
+
+export const updatePassword = (form) => {
   return {
     type: "UPDATE_PASSWORD",
-    payload: axiosApiIntances.patch(`auth/update-password/${id}`, form),
+    payload: axiosApiIntances.patch(`auth/update-password`, form),
   };
 };

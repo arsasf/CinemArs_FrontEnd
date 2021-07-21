@@ -14,7 +14,8 @@ class CardMovie extends Component {
       movie_name,
       movie_category,
       movie_release_date,
-      movie_duration,
+      movie_duration_hours,
+      movie_duration_minutes,
       movie_directed_by,
       movie_casts,
       movie_synopsis,
@@ -47,7 +48,7 @@ class CardMovie extends Component {
                       <h6>Release date</h6>
                       <h1>{formatDate(movie_release_date)}</h1>
                       <h6>Duration</h6>
-                      <h1>{movie_duration}</h1>
+                      <h1>{`${movie_duration_hours} ${movie_duration_minutes}`}</h1>
                     </div>
                     <div className={styles.actor}>
                       <h6>Directed by</h6>

@@ -72,7 +72,12 @@ class App extends Component {
                 component={Signin}
               />
               <PublicRoute path="/signup" exact component={Signup} />
-              <PublicRoute path="/" exact component={LandingPage} />
+              <PublicRoute
+                restricted={true}
+                path="/"
+                exact
+                component={LandingPage}
+              />
               <PrivateRoute path="/cinemars/home" exact component={Home} />
               <Route
                 path="/cinemars/movie-detail/:id"
