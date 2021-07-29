@@ -95,6 +95,7 @@ class Profile extends Component {
   };
 
   handleImage = (event) => {
+    console.log(event.target.value.substring(12, 250));
     this.setState({
       form: {
         ...this.state.form,
@@ -114,6 +115,20 @@ class Profile extends Component {
         userEmail: data.user_email,
         userPhoneNumber: data.user_phone_number,
         image: data.user_image,
+      },
+    });
+  };
+
+  setDelete = (data) => {
+    this.setState({
+      isUpdate: true,
+      id: data.user_id,
+      form: {
+        userFirstName: data.user_first_name,
+        userLastName: data.user_last_name,
+        userEmail: data.user_email,
+        userPhoneNumber: data.user_phone_number,
+        image: "",
       },
     });
   };
@@ -148,6 +163,7 @@ class Profile extends Component {
           ...this.state,
           show: true,
           error: true,
+          update: false,
           msg: err.response.data.msg,
         });
         this.resetData(event);
@@ -272,7 +288,8 @@ class Profile extends Component {
                         >
                           <CardProfile
                             data={item}
-                            handleUpdate={this.setUpdate.bind(this)}
+                            getData={this.getData.bind(this)}
+                            resetData={this.resetData.bind(this)}
                           />
                         </Container>
                       );

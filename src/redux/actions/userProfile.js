@@ -23,6 +23,13 @@ export const updateUser = (formData) => {
   };
 };
 
+export const deleteImage = (formData) => {
+  return {
+    type: "DELETE_IMAGE",
+    payload: axiosApiIntances.patch(`auth/delete-image`, formData),
+  };
+};
+
 export const updatePassword = (form) => {
   return {
     type: "UPDATE_PASSWORD",

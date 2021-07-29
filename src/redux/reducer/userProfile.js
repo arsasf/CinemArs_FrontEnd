@@ -72,6 +72,26 @@ const userProfile = (state = initialState, action) => {
         isError: true,
         msg: action.payload.response.data.msg,
       };
+    case "DELETE_IMAGE_PENDING":
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case "DELETE_IMAGE_FULFILLED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: action.payload.data.msg,
+      };
+    case "DELETE_IMAGE_REJECTED":
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        msg: action.payload.response.data.msg,
+      };
     case "UPDATE_PASSWORD_PENDING":
       return {
         ...state,

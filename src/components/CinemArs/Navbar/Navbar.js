@@ -223,10 +223,19 @@ function NavbarCinemars(props) {
                   >
                     {props.user ? (
                       props.userProfile.data.length > 0 ? (
-                        <Image
-                          src={`${process.env.REACT_APP_IMAGE_URL}${props.userProfile.data[0].user_image}`}
-                          className={style.imgDefault}
-                        />
+                        props.userProfile.data[0].user_image === "" ||
+                        props.userProfile.data[0].user_image === undefined ||
+                        props.userProfile.data[0].user_image === null ? (
+                          <Image
+                            src={imgDefault}
+                            className={style.imgDefault}
+                          />
+                        ) : (
+                          <Image
+                            src={`${process.env.REACT_APP_IMAGE_URL}${props.userProfile.data[0].user_image}`}
+                            className={style.imgDefault}
+                          />
+                        )
                       ) : (
                         <Image
                           src={`${process.env.REACT_APP_IMAGE_URL}${props.user.user_image}`}
@@ -330,10 +339,19 @@ function NavbarCinemars(props) {
                   >
                     {props.user ? (
                       props.userProfile.data.length > 0 ? (
-                        <Image
-                          src={`${process.env.REACT_APP_IMAGE_URL}${props.userProfile.data[0].user_image}`}
-                          className={style.imgDefault}
-                        />
+                        props.userProfile.data[0].user_image === "" ||
+                        props.userProfile.data[0].user_image === undefined ||
+                        props.userProfile.data[0].user_image === null ? (
+                          <Image
+                            src={imgDefault}
+                            className={style.imgDefault}
+                          />
+                        ) : (
+                          <Image
+                            src={`${process.env.REACT_APP_IMAGE_URL}${props.userProfile.data[0].user_image}`}
+                            className={style.imgDefault}
+                          />
+                        )
                       ) : (
                         <Image
                           src={`${process.env.REACT_APP_IMAGE_URL}${props.user.user_image}`}

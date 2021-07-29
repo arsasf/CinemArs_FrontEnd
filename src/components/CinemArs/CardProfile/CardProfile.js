@@ -1,8 +1,12 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import { Row, Dropdown, Col, Image, Button, Modal } from "react-bootstrap";
+import { Row, Col, Image, Button, Modal } from "react-bootstrap";
+import imgDefault from "../../../assets/img/img-not-found.png";
 import styles from "./CardProfile.module.css";
-import { Warning, XSquare } from "phosphor-react";
+import { Warning, XSquare, Trash } from "phosphor-react";
+
+import { connect } from "react-redux";
+import { deleteImage } from "../../../redux/actions/userProfile";
 
 class CardProfile extends Component {
   constructor(props) {
@@ -16,21 +20,44 @@ class CardProfile extends Component {
   handleShow = (param1) => {
     this.setState({
       show: param1,
-      msg: `Are you sure to update ?`,
+      msg: `Are you sure to delete image ?`,
     });
   };
 
   handleSure = (data, event) => {
-    this.props.handleUpdate(data, event);
-    this.setState({
-      ...this.state,
-      show: false,
-    });
+    const formData = new FormData();
+    formData.append("userFirstName", data.user_first_name);
+    formData.append("userLastName", data.user_last_name);
+    formData.append("userEmail", data.user_email);
+    formData.append("userPhoneNumber", data.user_phone_number);
+    formData.append("image", "");
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
+    this.props
+      .deleteImage(formData)
+      .then((res) => {
+        this.setState({
+          ...this.state,
+          show: false,
+        });
+        this.props.getData();
+        this.props.resetData(event);
+      })
+      .catch((err) => {
+        this.setState({
+          ...this.state,
+          show: false,
+        });
+        this.props.resetData(event);
+        return {};
+      });
   };
   render() {
     const { user_first_name, user_last_name, user_role, user_image } =
       this.props.data;
     const { data } = this.props;
+    console.log(this.props);
     return (
       <>
         <Modal
@@ -73,30 +100,24 @@ class CardProfile extends Component {
             <Link to="#" className={styles.infoCard}>
               Info
             </Link>
-            <Dropdown className={styles.dropdownSort}>
-              <Dropdown.Toggle
-                variant="#fff"
-                title="sort"
-                id="dropdown-basic"
-                className={styles.titleSort}
-              >
-                . . .
-              </Dropdown.Toggle>
-              <Dropdown.Menu className={styles.menuDropdown}>
-                <Dropdown.Item
-                  className={styles.listSort}
-                  onClick={() => this.handleShow(true)}
-                >
-                  Update Profile
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+            <Trash
+              size={30}
+              color="#5f2eea"
+              className={styles.iconDelete}
+              onClick={() => this.handleShow(true)}
+            />
           </Row>
           <Col className={styles.rowHeaderInfoCard2}>
-            <Image
-              src={`${process.env.REACT_APP_IMAGE_URL}${user_image}`}
-              className={styles.imageProfile}
-            />
+            {user_image === "" ||
+            user_image === undefined ||
+            user_image === null ? (
+              <Image src={imgDefault} className={styles.imageProfile} />
+            ) : (
+              <Image
+                src={`${process.env.REACT_APP_IMAGE_URL}${user_image}`}
+                className={styles.imageProfile}
+              />
+            )}
           </Col>
           <Row className={styles.rowHeaderInfoCard}>
             <Col>
@@ -112,4 +133,8 @@ class CardProfile extends Component {
   }
 }
 
-export default CardProfile;
+const mapDispatchToProps = {
+  deleteImage,
+};
+
+export default connect(null, mapDispatchToProps)(CardProfile);

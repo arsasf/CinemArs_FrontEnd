@@ -5,19 +5,9 @@
   font-family: "Mulish", sans-serif;
   background-color: #eaebee;
 }
-
-/* .left {
-  background-color: brown;
-} */
-
-/* .right {
-  background-color: cadetblue;
-} */
-
-/* .biodataForm {
-  background-color: chartreuse;
-} */
-
+.iconDelete:hover {
+  cursor: pointer;
+}
 .modalBody {
   display: flex;
   flex-direction: column;
@@ -164,7 +154,7 @@
   margin-left: 0;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 40px;
+  padding: 2em;
 }
 
 .rowHeaderInfoCard2 {
@@ -212,9 +202,6 @@
 }
 
 .infoCard {
-  margin-top: 20px;
-  margin-left: 40px;
-  margin-right: 40px;
   text-decoration: none;
   color: black;
   height: 40px;
@@ -334,9 +321,6 @@
 
 /* =====================Responsive */
 @media (max-width: 991.98px) {
-  .rowHeaderInfoCard {
-    margin-left: auto;
-  }
   .containerCard {
     margin-left: 20px;
   }
