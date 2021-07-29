@@ -8,11 +8,14 @@ class Bioskop extends Component {
     super(props);
     this.state = {
       showTime: "",
+      index: null,
     };
   }
-  handleSetTime = (show_time_id, movie_id, premiere_id) => {
+  handleSetTime = (show_time_id, movie_id, premiere_id, index, iShowTimes) => {
+    this.props.handleChoose(index);
     this.setState({
       showTime: show_time_id,
+      index: iShowTimes,
     });
     localStorage.setItem("movie_id", movie_id);
     localStorage.setItem("premiere_id", premiere_id);
@@ -49,9 +52,21 @@ class Bioskop extends Component {
               return (
                 <Button
                   key={i}
-                  className={styles.time1}
+                  className={
+                    this.state.showTime !== "" &&
+                    this.props.length === this.props.oldItem &&
+                    this.state.index === i
+                      ? styles.timeActive
+                      : styles.time1
+                  }
                   onClick={() =>
-                    this.handleSetTime(e.show_time_id, movie_id, premiere_id)
+                    this.handleSetTime(
+                      e.show_time_id,
+                      movie_id,
+                      premiere_id,
+                      this.props.length,
+                      i
+                    )
                   }
                 >
                   {e.show_time_clock}
@@ -66,12 +81,20 @@ class Bioskop extends Component {
           <div className={styles.booking}>
             <Button
               as={Link}
-              to={this.state.showTime !== "" ? "/cinemars/order" : `#`}
+              to={
+                this.state.showTime !== "" &&
+                this.props.length === this.props.oldItem
+                  ? "/cinemars/order"
+                  : `/cinemars/movie-detail/${movie_id}`
+              }
               type="button"
               variant="fff"
               className={`${styles.btn1} mb-3 shadow`}
             >
-              {this.state.showTime !== "" ? "Book Now" : "Choose Schedule"}
+              {this.state.showTime !== "" &&
+              this.props.length === this.props.oldItem
+                ? "Booking Now"
+                : "Choose Schedule"}
             </Button>
           </div>
         </Card>

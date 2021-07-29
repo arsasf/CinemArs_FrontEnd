@@ -22,10 +22,14 @@ import {
 import { getBookingHistory } from "../../../redux/actions/order";
 import CardProfile from "../../../components/CinemArs/CardProfile/CardProfile";
 import { Warning, CheckCircle, XSquare, Pencil } from "phosphor-react";
+import Dropzone from "react-dropzone";
 
 class Profile extends Component {
   constructor(props) {
     super(props);
+    this.onDrop = (files) => {
+      this.setState({ files });
+    };
     this.state = {
       form: {
         userFirstName: "",
@@ -36,6 +40,7 @@ class Profile extends Component {
         userNewPassword: "",
         userConfirmPassword: "",
       },
+      files: [],
       page: 1,
       limit: 4,
       show: false,
@@ -46,6 +51,7 @@ class Profile extends Component {
       error: false,
       msg: "",
       update: false,
+      bookingId: 0,
     };
   }
 
@@ -81,6 +87,7 @@ class Profile extends Component {
         userNewPassword: "",
         userConfirmPassword: "",
         image: "",
+        files: [],
       },
     });
   };
@@ -94,21 +101,12 @@ class Profile extends Component {
     });
   };
 
-  handleImage = (event) => {
-    console.log(event.target.value.substring(12, 250));
-    this.setState({
-      form: {
-        ...this.state.form,
-        image: event.target.files[0],
-      },
-    });
-  };
-
   setUpdate = (data) => {
     this.setState({
       isUpdate: true,
       id: data.user_id,
       update: true,
+      files: [],
       form: {
         userFirstName: data.user_first_name,
         userLastName: data.user_last_name,
@@ -132,7 +130,7 @@ class Profile extends Component {
       },
     });
   };
-  updateData = (event) => {
+  updateData = (event, file) => {
     event.preventDefault();
     this.setState({ isUpdate: false });
     this.resetData(event);
@@ -141,7 +139,7 @@ class Profile extends Component {
     formData.append("userLastName", this.state.form.userLastName);
     formData.append("userEmail", this.state.form.userEmail);
     formData.append("userPhoneNumber", this.state.form.userPhoneNumber);
-    formData.append("image", this.state.form.image);
+    formData.append("image", file);
     // for (var pair of formData.entries()) {
     //   console.log(pair[0] + ", " + pair[1]);
     // }
@@ -154,6 +152,7 @@ class Profile extends Component {
           error: false,
           msg: "Success Updated !",
           update: false,
+          files: [],
         });
         this.getData();
         this.resetData(event);
@@ -165,6 +164,7 @@ class Profile extends Component {
           error: true,
           update: false,
           msg: err.response.data.msg,
+          files: [],
         });
         this.resetData(event);
         return {};
@@ -203,10 +203,11 @@ class Profile extends Component {
     });
   };
 
-  handleDetail = (param) => {
+  handleDetail = (param, bookingId) => {
     this.setState({
       ...this.state,
       detail: param,
+      bookingId: bookingId,
     });
   };
 
@@ -220,11 +221,35 @@ class Profile extends Component {
         userEmail: "",
         userPhoneNumber: "",
         image: "",
+        files: [],
       },
     });
   };
 
+  handleImage = () => {
+    this.setState({
+      ...this.state,
+      show: true,
+      error: true,
+      msg: "Please click icon edit !",
+    });
+  };
+
   render() {
+    const files = this.state.files.map((file) => (
+      <div
+        key={file.name}
+        className={
+          (file.size / 1000000).toFixed(2) <= 3
+            ? styles.acceptedFile
+            : styles.rejectedFile
+        }
+      >
+        Name : {file.name}
+        <br />
+        Size : {(file.size / 1000000).toFixed(2)}MB
+      </div>
+    ));
     const { data } = this.props.userProfile;
     const formatDate = (dateString) => {
       const options = { year: "numeric", month: "long", day: "numeric" };
@@ -327,7 +352,9 @@ class Profile extends Component {
                     {this.state.active === false ? (
                       <div>
                         <Form
-                          onSubmit={this.updateData}
+                          onSubmit={(e) =>
+                            this.updateData(e, this.state.files[0])
+                          }
                           onReset={this.resetData}
                         >
                           <Col className={styles.colForm}>
@@ -392,13 +419,36 @@ class Profile extends Component {
                                       defaultValue={this.state.form.userEmail}
                                     />
                                   </Form.Group>
-                                  <Form.Control
-                                    className={styles.placeholder}
-                                    type="file"
-                                    onChange={(event) =>
-                                      this.handleImage(event)
-                                    }
-                                  />
+                                  <Form.Group className={styles.form}>
+                                    {this.state.update === false ? (
+                                      <div
+                                        className={styles.formImage}
+                                        onClick={() => this.handleImage()}
+                                      >
+                                        <p>Choose Image Max Size 3MB</p>
+                                      </div>
+                                    ) : (
+                                      <Dropzone onDrop={this.onDrop}>
+                                        {({ getRootProps, getInputProps }) => (
+                                          <div
+                                            {...getRootProps({
+                                              className: "dropzone",
+                                            })}
+                                          >
+                                            <input {...getInputProps()} />
+                                            <div className={styles.formImage}>
+                                              <p>Choose Image Max Size 3MB</p>
+                                              <h6>
+                                                {this.state.update === false
+                                                  ? ""
+                                                  : files}
+                                              </h6>
+                                            </div>
+                                          </div>
+                                        )}
+                                      </Dropzone>
+                                    )}
+                                  </Form.Group>
                                 </Row>
                               </Col>
                               <Col lg={5}>
@@ -572,7 +622,20 @@ class Profile extends Component {
                                   {this.state.detail === false ? (
                                     <div
                                       className={styles.detail}
-                                      onClick={() => this.handleDetail(true)}
+                                      onClick={() =>
+                                        this.handleDetail(true, item.booking_id)
+                                      }
+                                    >
+                                      <h5>Show Details</h5>
+                                      <CaretDown size={24} color="#414141" />
+                                    </div>
+                                  ) : item.booking_id !==
+                                    this.state.bookingId ? (
+                                    <div
+                                      className={styles.detail}
+                                      onClick={() =>
+                                        this.handleDetail(true, item.booking_id)
+                                      }
                                     >
                                       <h5>Show Details</h5>
                                       <CaretDown size={24} color="#414141" />
@@ -583,65 +646,67 @@ class Profile extends Component {
                                       onClick={() => this.handleDetail(false)}
                                     >
                                       <h5>Close Details</h5>
+                                      {item.booking_id === this.state.bookingId}
                                       <CaretUp size={24} color="#5f2eea" />
                                     </div>
                                   )}
                                 </div>
-                                {this.state.detail === true && (
-                                  <div>
-                                    <hr />
-                                    <div className={styles.boxShowDetails}>
-                                      <h6>Movie </h6>
-                                      <h6>{item.movie_name}</h6>
+                                {this.state.detail === true &&
+                                  item.booking_id === this.state.bookingId && (
+                                    <div>
+                                      <hr />
+                                      <div className={styles.boxShowDetails}>
+                                        <h6>Movie </h6>
+                                        <h6>{item.movie_name}</h6>
+                                      </div>
+                                      <div className={styles.boxShowDetails}>
+                                        <h6>Release Date</h6>
+                                        <h6>
+                                          {formatDate(item.movie_release_date)}
+                                        </h6>
+                                      </div>
+                                      <div className={styles.boxShowDetails}>
+                                        <h6>Duration</h6>
+                                        <h6>{`${item.movie_duration_hours} ${item.movie_duration_minutes}`}</h6>
+                                      </div>
+                                      <div className={styles.boxShowDetails}>
+                                        <h6>Premiere</h6>
+                                        <h6>{item.premiere_name}</h6>
+                                      </div>
+                                      <div className={styles.boxShowDetails}>
+                                        <h6>Location Premiere</h6>
+                                        <h6>{item.location_address}</h6>
+                                      </div>
+                                      <div className={styles.boxShowDetails}>
+                                        <h6>Schedule</h6>
+                                        <h6>{`${formatDate(
+                                          item.show_time_date
+                                        )} ${item.show_time_clock} `}</h6>
+                                      </div>
+                                      <div className={styles.boxShowDetails}>
+                                        <h6>Method Payment</h6>
+                                        <h6>{item.booking_payment_method}</h6>
+                                      </div>
+                                      <div className={styles.boxShowDetails}>
+                                        <h6>Total Tickets</h6>
+                                        <h6>{item.booking_ticket} Pieces</h6>
+                                      </div>
+                                      <div className={styles.boxShowDetails}>
+                                        <h6>Total Prices</h6>
+                                        <h6>${item.booking_total_price}</h6>
+                                      </div>
+                                      <div className={styles.boxShowDetails}>
+                                        <h6>Booking Status</h6>
+                                        <h6>{item.booking_status}</h6>
+                                      </div>
+                                      <div className={styles.boxShowDetails}>
+                                        <h6>Booking Created</h6>
+                                        <h6>
+                                          {formatDate(item.booking_created_at)}
+                                        </h6>
+                                      </div>
                                     </div>
-                                    <div className={styles.boxShowDetails}>
-                                      <h6>Release Date</h6>
-                                      <h6>
-                                        {formatDate(item.movie_release_date)}
-                                      </h6>
-                                    </div>
-                                    <div className={styles.boxShowDetails}>
-                                      <h6>Duration</h6>
-                                      <h6>{`${item.movie_duration_hours} ${item.movie_duration_minutes}`}</h6>
-                                    </div>
-                                    <div className={styles.boxShowDetails}>
-                                      <h6>Premiere</h6>
-                                      <h6>{item.premiere_name}</h6>
-                                    </div>
-                                    <div className={styles.boxShowDetails}>
-                                      <h6>Location Premiere</h6>
-                                      <h6>{item.location_address}</h6>
-                                    </div>
-                                    <div className={styles.boxShowDetails}>
-                                      <h6>Schedule</h6>
-                                      <h6>{`${formatDate(
-                                        item.show_time_date
-                                      )} ${item.show_time_clock} `}</h6>
-                                    </div>
-                                    <div className={styles.boxShowDetails}>
-                                      <h6>Method Payment</h6>
-                                      <h6>{item.booking_payment_method}</h6>
-                                    </div>
-                                    <div className={styles.boxShowDetails}>
-                                      <h6>Total Tickets</h6>
-                                      <h6>{item.booking_ticket} Pieces</h6>
-                                    </div>
-                                    <div className={styles.boxShowDetails}>
-                                      <h6>Total Prices</h6>
-                                      <h6>${item.booking_total_price}</h6>
-                                    </div>
-                                    <div className={styles.boxShowDetails}>
-                                      <h6>Booking Status</h6>
-                                      <h6>{item.booking_status}</h6>
-                                    </div>
-                                    <div className={styles.boxShowDetails}>
-                                      <h6>Booking Created</h6>
-                                      <h6>
-                                        {formatDate(item.booking_created_at)}
-                                      </h6>
-                                    </div>
-                                  </div>
-                                )}
+                                  )}
                               </div>
                             );
                           })

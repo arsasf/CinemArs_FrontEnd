@@ -55,6 +55,21 @@
   background-color: #dedede;
 }
 
+.timeActive {
+  justify-content: space-between;
+  width: 24%;
+  height: 35px;
+  background-color: #302f31 !important;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-top: 20px;
+  color: white !important;
+  font-size: 12px;
+  font-weight: lighter;
+  border-color: #302f31 !important;
+  border: #302f31 !important;
+}
+
 .time1 {
   justify-content: space-between;
   width: 24%;

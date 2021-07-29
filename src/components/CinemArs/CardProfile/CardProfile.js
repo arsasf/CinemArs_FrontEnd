@@ -57,7 +57,6 @@ class CardProfile extends Component {
     const { user_first_name, user_last_name, user_role, user_image } =
       this.props.data;
     const { data } = this.props;
-    console.log(this.props);
     return (
       <>
         <Modal

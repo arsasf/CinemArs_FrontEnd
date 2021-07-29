@@ -27,6 +27,7 @@ class movieDetail extends Component {
       searchByDate: "premiere.show_time_date",
       showDate: new Date().toISOString().slice(0, 10),
       setLocation: "All Location",
+      oldItem: null,
     };
   }
 
@@ -184,6 +185,13 @@ class movieDetail extends Component {
         });
     }
   };
+
+  handleChoose = (data) => {
+    this.setState({
+      ...this.state,
+      oldItem: data,
+    });
+  };
   render() {
     const { data, dataPremiere, setLocation, showDate } = this.state;
     return (
@@ -289,6 +297,9 @@ class movieDetail extends Component {
                                   dataPremiere={item}
                                   data={data[0]}
                                   key={index}
+                                  length={index}
+                                  handleChoose={this.handleChoose.bind(this)}
+                                  oldItem={this.state.oldItem}
                                 />
                               );
                             })}

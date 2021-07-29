@@ -30,7 +30,8 @@ class Home extends Component {
       searchByName: "",
       sort: "movie_id ASC",
       month: "MONTH(movie_release_date)",
-      viewAll: false,
+      viewAllShowing: false,
+      viewAllUpcoming: false,
       totalDataMovieMonth: 0,
       totalDataMovie: 0,
     };
@@ -82,7 +83,7 @@ class Home extends Component {
     this.setState(
       {
         ...this.state.from,
-        viewAll: false,
+        viewAllShowing: false,
         limit: 5,
         month: "month(now())",
       },
@@ -96,7 +97,8 @@ class Home extends Component {
     this.setState(
       {
         ...this.state,
-        viewAll: true,
+        viewAllShowing: true,
+        viewAllUpcoming: false,
         limit: totalData,
         month: "month(now())",
       },
@@ -110,7 +112,7 @@ class Home extends Component {
     this.setState(
       {
         ...this.state.from,
-        viewAll: false,
+        viewAllUpcoming: false,
         limit: 5,
         month: "MONTH(movie_release_date)",
       },
@@ -124,7 +126,8 @@ class Home extends Component {
     this.setState(
       {
         ...this.state,
-        viewAll: true,
+        viewAllUpcoming: true,
+        viewAllShowing: false,
         limit: totalData,
         month: "MONTH(movie_release_date)",
       },
@@ -151,7 +154,8 @@ class Home extends Component {
     const {
       dataAllMovie,
       dataMovieMonthNow,
-      viewAll,
+      viewAllShowing,
+      viewAllUpcoming,
       totalDataMovie,
       totalDataMovieMonth,
     } = this.state;
@@ -204,7 +208,7 @@ class Home extends Component {
                   <Link
                     to="#"
                     onClick={
-                      viewAll === false
+                      viewAllShowing === false
                         ? (event) =>
                             this.handleMovieShowingAllClick(
                               event,
@@ -214,7 +218,7 @@ class Home extends Component {
                     }
                     className={styles.viewAllShowing}
                   >
-                    {viewAll === true ? "View Less" : "View All"}
+                    {viewAllShowing === true ? "View Less" : "View All"}
                   </Link>
                 </Row>
                 <Row
@@ -251,7 +255,7 @@ class Home extends Component {
                   <Link
                     to="#"
                     onClick={
-                      viewAll === false
+                      viewAllUpcoming === false
                         ? (event) =>
                             this.handleMovieUpcomingAllClick(
                               event,
@@ -261,7 +265,7 @@ class Home extends Component {
                     }
                     className={styles.viewAll}
                   >
-                    {viewAll === false ? "View All" : "View Less"}
+                    {viewAllUpcoming === false ? "View All" : "View Less"}
                   </Link>
                 </Row>
                 <Row className={styles.month}>
