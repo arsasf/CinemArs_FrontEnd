@@ -18,6 +18,17 @@
   font-size: 18px;
 }
 
+.boxDetailsInformation {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 2em;
+}
+
+.iconEdit {
+  cursor: pointer;
+}
+
 .createDataToast {
   display: flex;
   width: 100%;

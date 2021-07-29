@@ -12,7 +12,7 @@ import {
   InputGroup,
   Image,
 } from "react-bootstrap";
-import { CaretDown, CaretUp } from "phosphor-react";
+import { CaretDown, CaretUp, X } from "phosphor-react";
 import { connect } from "react-redux";
 import {
   getUserById,
@@ -21,7 +21,7 @@ import {
 } from "../../../redux/actions/userProfile";
 import { getBookingHistory } from "../../../redux/actions/order";
 import CardProfile from "../../../components/CinemArs/CardProfile/CardProfile";
-import { Warning, CheckCircle, XSquare } from "phosphor-react";
+import { Warning, CheckCircle, XSquare, Pencil } from "phosphor-react";
 
 class Profile extends Component {
   constructor(props) {
@@ -45,6 +45,7 @@ class Profile extends Component {
       dataHistory: [],
       error: false,
       msg: "",
+      update: false,
     };
   }
 
@@ -79,6 +80,7 @@ class Profile extends Component {
         userPhoneNumber: "",
         userNewPassword: "",
         userConfirmPassword: "",
+        image: "",
       },
     });
   };
@@ -105,6 +107,7 @@ class Profile extends Component {
     this.setState({
       isUpdate: true,
       id: data.user_id,
+      update: true,
       form: {
         userFirstName: data.user_first_name,
         userLastName: data.user_last_name,
@@ -135,17 +138,19 @@ class Profile extends Component {
           show: true,
           error: false,
           msg: "Success Updated !",
+          update: false,
         });
         this.getData();
+        this.resetData(event);
       })
       .catch((err) => {
-        console.log(err);
         this.setState({
           ...this.state,
           show: true,
           error: true,
           msg: err.response.data.msg,
         });
+        this.resetData(event);
         return {};
       });
   };
@@ -186,6 +191,20 @@ class Profile extends Component {
     this.setState({
       ...this.state,
       detail: param,
+    });
+  };
+
+  handleCancel = () => {
+    this.setState({
+      ...this.state,
+      update: false,
+      form: {
+        userFirstName: "",
+        userLastName: "",
+        userEmail: "",
+        userPhoneNumber: "",
+        image: "",
+      },
     });
   };
 
@@ -296,9 +315,30 @@ class Profile extends Component {
                         >
                           <Col className={styles.colForm}>
                             <Row className={styles.DetailsInformation}>
-                              <p className={styles.titleDetailsInformation}>
-                                Details Information
-                              </p>
+                              <div className={styles.boxDetailsInformation}>
+                                <p className={styles.titleDetailsInformation}>
+                                  Details Information
+                                </p>
+                                {this.state.update === false ? (
+                                  <Pencil
+                                    size={30}
+                                    color="#5f2eea"
+                                    onClick={() =>
+                                      this.setUpdate(
+                                        this.props.userProfile.data[0]
+                                      )
+                                    }
+                                    className={styles.iconEdit}
+                                  />
+                                ) : (
+                                  <X
+                                    size={30}
+                                    color="red"
+                                    onClick={() => this.handleCancel()}
+                                    className={styles.iconEdit}
+                                  />
+                                )}
+                              </div>
                               <span className={styles.line}></span>
                             </Row>
                             <Row className={styles.contentForm}>
@@ -397,13 +437,17 @@ class Profile extends Component {
                           </Col>
                           <Row className={styles.rowButton}>
                             <Col>
-                              <Button
-                                variant="dark"
-                                className={`${styles.buttonSubmit} shadow`}
-                                type="submit"
-                              >
-                                Update Changes
-                              </Button>
+                              {this.state.update === false ? (
+                                ""
+                              ) : (
+                                <Button
+                                  variant="dark"
+                                  className={`${styles.buttonSubmit} shadow`}
+                                  type="submit"
+                                >
+                                  Update Changes
+                                </Button>
+                              )}
                             </Col>
                           </Row>
                         </Form>
